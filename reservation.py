@@ -11,19 +11,21 @@ class Reservation:
         self.court = court
         self.user = user
         self.reservationData = (date, startTime, endTime)
-        __class__.reservationsData.append([self.id, self.reservationData, court])
-
+        __class__.reservationsData.append([self.reservationData, self.user, self.id, self.court])
 
     
-    def getResData(self):
+    @classmethod
+    def getResData(id):
 
-        return self.resevationData
+        return __class__.reservationsData[id][0]
     
 
-    def getResUser(self):
+    @classmethod
+    def getResUser(id):
 
-        return self.user
+        return __class__.reservationsData[id][1]
     
-    def getResId(self):
+    @classmethod
+    def getResId(id):
 
-        return self.id
+        return __class__.reservationsData[id][2]
