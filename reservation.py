@@ -6,8 +6,8 @@ class Reservation:
 
 
     def __init__(self, court, user, date, startTime, endTime):
-        self.__class__.ser+=1
         self.id = self.__class__.ser
+        self.__class__.ser+=1
         self.court = court
         self.user = user
         self.reservationData = (date, startTime, endTime)
@@ -15,17 +15,17 @@ class Reservation:
 
     
     @classmethod
-    def getResData(id):
+    def getResData(__class__, id):
 
         return __class__.reservationsData[id][0]
     
 
     @classmethod
-    def getResUser(id):
+    def getResUser(__class__, id):
 
         return __class__.reservationsData[id][1]
     
     @classmethod
-    def getResId(id):
+    def getResId(__class__, id):
 
         return __class__.reservationsData[id][2]
