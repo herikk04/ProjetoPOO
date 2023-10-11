@@ -6,14 +6,13 @@ class Court:
     courtReservationData = []
 
 
-    def __init__(self, type, location, pricePerHour, availability):
-        self.agenda = agenda.Agenda(self.id, availability)
-        self.__class__.ser+=1
+    def __init__(self, type, location, pricePerHour, week_days, weekend):
         self.id = self.__class__.ser
+        self.__class__.ser+=1
         self.type = type
         self.location = location
         self.pricePerHour = pricePerHour
-        self.availability = agenda.Agenda.getAvailabilty(self.id)
+        self.agenda = agenda.Agenda(self.id, week_days, weekend)
     
 
     def getDetails(self):
@@ -31,12 +30,11 @@ class Court:
     
 
     def bookCourt(self, user, date, startTime, endTime):
-        userReservation = reservation.Reservation(self.id, user, date, startTime, endTime)
-        if self.checkAvailability(userReservation.getResData()) == True:
+        reservation.Reservation(self.id, user, date, startTime, endTime)
+        if self.checkAvailability(date, startTime, endTime) == True:
             for timeSlot in agenda.Agenda.courtAgendaData[self.id][date][startTime:endTime]:
-                timeSlot = [userReservation.getResUser(), False]
-
-            __class__.courtReservationData.append(userReservation.getResId()) ## Guardar os id's de reserva em todos os objetos User
+                timeSlot = [reservation.Reservation.getResUser(self.id), False]
+            __class__.courtReservationData.append(reservation.Reservation.getResId(self.id)) ## Guardar os id's de reserva em todos os objetos User
     
 
     def cancelBooking(self, resID):
