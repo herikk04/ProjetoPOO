@@ -3,16 +3,16 @@ import pandas as pd
 
 
 def main():
-    courtTest = court.Court("Basquete", "São Paulo", "100","0 1 0 0 1 1 0 1", "0 1 0 0 0 0 1 1")
+    courtTest = court.Court("Basquete", "São Paulo", "100", "1 1 1 1 1 1 1 1 1 1", "1 1 1 1 1 1 1 1 1 1")
     a = int(input())
 
     match a:
         case 1:
             print(courtTest.getDetails())
-            print(courtTest.id)
-        case 2:
-            courtTest.bookCourt("João", 3, 4, 5)
+            print(courtTest.courtID)
+            courtTest.bookCourt("João", 1, 3, 5)
             print(courtTest.checkAvailability(3, 4, 6))
+            print(courtTest.agenda.getAgenda(courtTest.courtID))
 
 
 if __name__ == '__main__':

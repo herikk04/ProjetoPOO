@@ -26,6 +26,6 @@ class Reservation:
         return __class__.reservationsData[id][1]
     
     @classmethod
-    def getResId(__class__, id):
+    def getResID(__class__, id):
 
         return __class__.reservationsData[id][2]
