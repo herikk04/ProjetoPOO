@@ -1,0 +1,110 @@
+Documentação do projeto:
+By: Chat GPT 
+
+main.py:
+Este é o arquivo principal do programa de reserva de quadras para academias. Ele demonstra o uso das classes Court, Agenda, Reservation e User, bem como a funcionalidade de reserva e verificação de disponibilidade de quadras.
+
+Requer os módulos agenda, court, reservation e user para funcionar corretamente.
+
+Dependências:
+    - pandas
+    - agenda (módulo personalizado)
+    - court (módulo personalizado)
+    - reservation (módulo personalizado)
+    - user (módulo personalizado)
+
+Uso:
+    - Execute este arquivo para demonstrar o funcionamento do sistema de reserva de quadras.
+______________________________________________________________________________________________________________________________________________________________________________________
+
+court.py:
+Este módulo contém a classe Court que representa uma quadra esportiva para reservas.
+
+Classe Court:
+- A classe Court é usada para criar instâncias de quadras esportivas e gerenciar suas reservas.
+
+Atributos:
+- ser (int): Um contador para rastrear o ID da quadra.
+- courtReservationData (list): Uma lista para armazenar IDs de reservas de todas as quadras.
+
+Métodos:
+- __init__(self, type, location, pricePerHour, week_days, weekend): Inicializa uma instância de Court com os atributos especificados.
+- getDetails(self): Retorna detalhes da quadra, incluindo tipo, localização e preço por hora.
+- checkAvailability(self, date, startTime, endTime): Verifica a disponibilidade da quadra em um determinado horário.
+- bookCourt(self, user, date, startTime, endTime): Reserva a quadra para um usuário em um determinado horário.
+- cancelBooking(self, resID): Cancela uma reserva de quadra com base no ID da reserva.
+
+Dependências:
+- Utiliza as classes Reservation, User e Agenda do módulo reservation, user e agenda, respectivamente.
+
+Exemplo de uso:
+- Crie uma instância de Court, verifique a disponibilidade, reserve ou cancele uma reserva.
+______________________________________________________________________________________________________________________________________________________________________________________
+
+agenda.py:
+Este módulo contém a classe Agenda que gerencia as agendas das quadras esportivas.
+
+Classe Agenda:
+- A classe Agenda é usada para criar instâncias de agendas de quadras esportivas e gerenciar seus dados.
+
+Atributos:
+- courtAgendaData (list): Uma lista que armazena as agendas das quadras.
+
+Métodos:
+- __init__(self, aCourt, weekDays, weekend): Inicializa uma instância de Agenda com a agenda de uma quadra específica.
+- getAgenda(cls, id): Retorna a agenda de uma quadra com base em seu ID.
+- updateAgenda(cls, id, date, startTime, endTime, value): Atualiza a agenda de uma quadra com novos valores.
+
+Dependências:
+- Utiliza a classe Court do módulo court.
+
+Exemplo de uso:
+- Crie uma instância de Agenda para uma quadra, obtenha a agenda, e atualize a agenda conforme necessário.
+______________________________________________________________________________________________________________________________________________________________________________________
+
+reservation.py:
+Este módulo contém a classe Reservation que representa as reservas de quadras esportivas.
+
+Classe Reservation:
+- A classe Reservation é usada para criar instâncias de reservas de quadras e gerenciar seus dados.
+
+Atributos:
+- ser (int): Um contador para rastrear o ID da reserva.
+- reservationsData (list): Uma lista que armazena dados das reservas, incluindo a data, horário, usuário, ID da reserva e quadra associada.
+
+Métodos:
+- __init__(self, court, user, date, startTime, endTime): Inicializa uma instância de Reservation com os dados da reserva.
+- getResData(__class__, id): Obtém os dados da reserva com base no ID da reserva.
+- getResUser(__class__, id): Obtém o usuário associado a uma reserva com base no ID da reserva.
+- getResID(__class__, id): Obtém o ID da reserva com base no ID da reserva.
+
+Dependências:
+- Utiliza as classes Court e User do módulo court e user, respectivamente.
+
+Exemplo de uso:
+- Crie uma instância de Reservation para uma reserva de quadra, obtenha dados da reserva, o usuário associado e o ID da reserva.
+______________________________________________________________________________________________________________________________________________________________________________________
+
+user.py:
+Este módulo contém a classe User e a classe derivada Locator que representam usuários do sistema.
+
+Classe User:
+- A classe User é usada para criar instâncias de usuários comuns do sistema.
+
+Atributos:
+- ser (int): Um contador para rastrear o ID do usuário.
+
+Métodos:
+- __init__(self, name, email, phoneNumber): Inicializa uma instância de User com os dados do usuário, incluindo nome, email e número de telefone.
+
+Classe Locator (Herança de User):
+- A classe Locator é derivada da classe User e é usada para criar instâncias de usuários que possuem quadras esportivas.
+
+Atributos:
+- ownedCourts (list): Uma lista que armazena as quadras esportivas de propriedade do usuário.
+
+Métodos:
+- __init__(self, name, email, phoneNumber, ownedCourtsNum, ownedCourts): Inicializa uma instância de Locator com dados de usuário adicionais, incluindo o número de quadras esportivas de propriedade e as quadras de propriedade.
+
+Exemplo de uso:
+- Crie uma instância de User ou Locator com os dados do usuário, incluindo nome, email, número de telefone e, para Locator, as quadras de propriedade.
