@@ -2,6 +2,7 @@ Documentação do projeto:
 By: Chat GPT 
 
 main.py:
+## Essa classe vai ter as funções de execução do software, falta tudo ainda
 Este é o arquivo principal do programa de reserva de quadras para academias. Ele demonstra o uso das classes Court, Agenda, Reservation e User, bem como a funcionalidade de reserva e verificação de disponibilidade de quadras.
 
 Requer os módulos agenda, court, reservation e user para funcionar corretamente.
@@ -87,6 +88,19 @@ ________________________________________________________________________________
 
 user.py:
 Este módulo contém a classe User e a classe derivada Locator que representam usuários do sistema.
+## Falta ser inserida a classe filha Renter(User)
+##
+## -------------------------
+## |        Renter          |
+## -------------------------
+## | - reservations: Reservation[] |
+## | + makeReservation(court: Court, date: Date, startTime: Time, endTime: Time): 
+## Reservation |
+## | + viewReservationHistory(): Reservation[] |
+## -------------------------
+##
+## E falta terminar a classe Locator(User)
+
 
 Classe User:
 - A classe User é usada para criar instâncias de usuários comuns do sistema.
