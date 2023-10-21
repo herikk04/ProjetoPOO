@@ -5,7 +5,7 @@ class Agenda:
     
     
     def __init__(self, aCourt, weekDays, weekend):
-        self.id = aCourt
+        self.agendaID = aCourt
         wD, wE = [(weekDays).split(' ')]*5,[(weekend).split(' ')]*2
         w = wD + wE
         self.courtAgenda = w*100
@@ -19,13 +19,13 @@ class Agenda:
 
 
     @classmethod
-    def getAgenda(cls, id):
+    def getAgenda(cls, agendaID):
 
-        return cls.courtAgendaData[id]
+        return cls.courtAgendaData[agendaID]
     
 
     @classmethod
-    def updateAgenda(cls, id, date, startTime, endTime, value):
+    def updateAgenda(cls, agendaID, date, startTime, endTime, value):
         for i in range(startTime,endTime+1):
-            cls.courtAgendaData[id][date][i] = value
+            cls.courtAgendaData[agendaID][date][i] = value
         

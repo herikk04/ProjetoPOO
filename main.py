@@ -12,7 +12,7 @@ def main():
             print(courtTest.courtID)
             courtTest.bookCourt("João", 1, 3, 5)
             print(courtTest.checkAvailability(3, 4, 6))
-            print(courtTest.agenda.getAgenda(courtTest.courtID))
+            print(courtTest.agenda.getAgenda(courtTest.courtID)) #### FALTA CORRIGIR PROBLEMA NA GRAVAÇÃO DE DADOS NA AGENDA
 
 
 if __name__ == '__main__':

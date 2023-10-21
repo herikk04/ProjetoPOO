@@ -13,21 +13,7 @@ class Court:
         self.location = location
         self.pricePerHour = pricePerHour
         self.agenda = agenda.Agenda(self.courtID, week_days, weekend)
-    
 
-    def getDetails(self):
-
-        return self.type, self.location, self.pricePerHour
-    
-
-    def checkAvailability(self, date, startTime, endTime):
-        for timeSlot in agenda.Agenda.getAgenda(self.courtID)[date][startTime:endTime]:
-            if timeSlot[1] == False:
-
-                return False
-            
-        return True
-    
 
     def bookCourt(self, user, date, startTime, endTime):
         if self.checkAvailability(date, startTime, endTime) == True:
@@ -42,3 +28,19 @@ class Court:
         reservationToCancel = reservation.Reservation.getResData[resID] 
         if self.checkAvailability(agenda.Agenda.courtAgendaData[self.courtID][reservationToCancel[1][0]][reservationToCancel[1][1]:reservationToCancel[1][2]]) == False:
             agenda.Agenda.updateAgenda(resID, reservationToCancel[1][0], reservationToCancel[1][1], reservationToCancel[1][2], [None, True])
+
+    
+    @classmethod
+    def getDetails(__class__, courtID):
+
+
+        return __class__.courtReservationData[courtID]
+    
+
+    def checkAvailability(self, date, startTime, endTime):
+        for timeSlot in agenda.Agenda.getAgenda(self.courtID)[date][startTime:endTime]:
+            if timeSlot[1] == False:
+
+                return False
+            
+        return True
