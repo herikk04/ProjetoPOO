@@ -7,6 +7,7 @@ class Agenda:
     def __init__(self, aCourt, weekDays, weekend):
         self.agendaID = aCourt
         wD, wE = (weekDays).split(' '),(weekend).split(' ')
+        
         for i, timeSlot in list(enumerate(wD)):
             if timeSlot == '0':
                 wD[i] = [None, False]
@@ -19,7 +20,6 @@ class Agenda:
             elif timeSlot == '1':
                 wE[i] = [None, True]
 
-            
         self.courtAgenda = list(zeros(700))
         for i in range(0,699,7):
             self.courtAgenda[i] = wD.copy()
@@ -29,9 +29,6 @@ class Agenda:
             self.courtAgenda[i+4] = wD.copy()
             self.courtAgenda[i+5] = wE.copy()
             self.courtAgenda[i+6] = wE.copy()
-        print(self.courtAgenda)
-
-
 
         self.__class__.courtAgendaData.append(self.courtAgenda)
 
@@ -46,4 +43,4 @@ class Agenda:
     def updateAgenda(__class__, agendaID, date, startTime, endTime, value):
         for i in range(startTime,endTime+1):
             __class__.courtAgendaData[agendaID][date-1][i] = value
-        
+       
