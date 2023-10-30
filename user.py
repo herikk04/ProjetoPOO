@@ -1,4 +1,4 @@
-import court
+import court, flaskrun
 class User:
     ser = 0
     userData = {"Locator": [], "Renter": []}
@@ -14,7 +14,7 @@ class User:
 class Locator(User):
     ser = 0
 
-    def __init__(self, name, email, phoneNumber, ownedCourtsNum):
+    def __init__(self, name, username, password, email, phoneNumber, ownedCourtsNum): ## TERMINAR A LÓGICA DE SENHA E USUÁRIO
         super().__init__(name, email, phoneNumber)
         self.locatorID = self.__class__.ser
         self.__class__.ser+=1
@@ -34,7 +34,7 @@ class Locator(User):
 class Renter(User):
     ser = 0
 
-    def __init__(self, name, email, phoneNumber):
+    def __init__(self, name, username, password, email, phoneNumber):
         super().__init__(name, email, phoneNumber)
         self.renterID = self.__class__.ser
         self.__class__.ser+=1
