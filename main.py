@@ -3,16 +3,17 @@ import pandas as pd
 
 
 def main():
-    courtTest = court.Court("Basquete", "São Paulo", "100", "1 1 1 1 1 1 1 1 1 1", "1 1 1 1 1 1 1 1 1 1")
-    a = int(input())
+    ## INICIALIZAR LOCATÁRIO --> COM SUAS QUADRAS
+    locator = user.Locator("Robson", "robson@email.com", "62989898989", 3)
 
-    match a:
-        case 1:
-            print(courtTest.getDetails())
-            print(courtTest.courtID)
-            courtTest.bookCourt("João", 1, 3, 5)
-            print(courtTest.checkAvailability(3, 4, 6))
-            print(courtTest.agenda.getAgenda(courtTest.courtID)) #### FALTA CORRIGIR PROBLEMA NA GRAVAÇÃO DE DADOS NA AGENDA
+    ## INICIALIZAR USUÁRIO
+
+    ## FAZER RESERVA
+
+    ## CANCELAR RESERVA
+    print(pd.DataFrame(agenda.Agenda.courtAgendaData))
+    print(pd.DataFrame(court.Court.courtReservationData))
+    print(pd.DataFrame(user.User.userData))
 
 
 if __name__ == '__main__':
