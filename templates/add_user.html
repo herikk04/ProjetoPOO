@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+        }
+        
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        input, select {
+            width: calc(100% - 22px); /* Adjust the width based on your padding and border */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }        
+    </style>
+</head>
+
+<body>
+    <h2>Adicionar Novo Usuário</h2>
+    <form method="POST" action="/add_user">
+        <label for="username">Nome de Usuário:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required><br>
+        <label for="userType">Tipo de Usuário:</label>
+        <select id="userType" name="userType">
+            <option value="locador">Locador</option>
+            <option value="locatario">Locatário</option>
+        </select><br>
+        <button type="submit">Adicionar Usuário</button>
+    </form>
+</body>
+
+</html>
