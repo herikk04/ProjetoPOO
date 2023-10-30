@@ -15,24 +15,32 @@ class Court:
         self.agenda = agenda.Agenda(self.courtID, week_days, weekend)
 
 
-    def bookCourt(self, user, date, startTime, endTime):
+    def bookCourt(self, userID, date, startTime, endTime):
         if self.checkAvailability(date, startTime, endTime) == True:
-            reservation.Reservation(self.courtID, user, date, startTime, endTime)
+            thisreservation = reservation.Reservation(self.courtID, user.Locator.getRenterName(userID), date, startTime, endTime)
             agenda.Agenda.updateAgenda(self.courtID, date, startTime, endTime, [user, False])
             
-            __class__.courtReservationData.append(reservation.Reservation.getResID(self.courtID)) ## Guardar os courtID's de reserva em todos os objetos User
+            __class__.courtReservationData.append(thisreservation.getResID(self.courtID)) ## Guardar os courtID's de reserva em todos os objetos User
+            user.Renter.registerReservation(thisreservation.getResID(self.courtID))
         else:
+            
             return False
 
     def cancelBooking(self, resID):
         reservationToCancel = reservation.Reservation.getResData[resID] 
         if self.checkAvailability(agenda.Agenda.courtAgendaData[self.courtID][reservationToCancel[1][0]][reservationToCancel[1][1]:reservationToCancel[1][2]]) == False:
             agenda.Agenda.updateAgenda(resID, reservationToCancel[1][0], reservationToCancel[1][1], reservationToCancel[1][2], [None, True])
+            user.Renter.unregisterReservation(reservationToCancel)
+        else:
 
+            return False
     
+    def giveID(self):
+
+        return self.courtID
+
     @classmethod
     def getDetails(__class__, courtID):
-
 
         return __class__.courtReservationData[courtID]
     
