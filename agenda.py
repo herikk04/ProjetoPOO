@@ -19,7 +19,7 @@ class Agenda:
                 wE[i] = [None, False]
             elif timeSlot == '1':
                 wE[i] = [None, True]
-     
+
         self.courtAgenda = list(zeros(700))
         for i in range(0,699,7):
             self.courtAgenda[i] = wD.copy()
@@ -43,4 +43,4 @@ class Agenda:
     def updateAgenda(__class__, agendaID, date, startTime, endTime, value):
         for i in range(startTime,endTime+1):
             __class__.courtAgendaData[agendaID][date-1][i] = value
-        
+       
