@@ -14,21 +14,16 @@ class User:
 class Locator(User):
     ser = 0
 
-    def __init__(self, name, username, password, email, phoneNumber, ownedCourtsNum): ## TERMINAR A LÓGICA DE SENHA E USUÁRIO
+    def __init__(self, name, username, password, email, phoneNumber): ## TERMINAR A LÓGICA DE SENHA E USUÁRIO
         super().__init__(name, email, phoneNumber)
         self.locatorID = self.__class__.ser
         self.__class__.ser+=1
         self.ownedCourts = []
-        for _ in range(ownedCourtsNum):
-            type = input()
-            location = input()
-            pricePerHour = input()
-            week_days = input()
-            weekend = input()
-            thiscourt = court.Court(type, location, pricePerHour, week_days, weekend)
-            self.ownedCourts.append(thiscourt.giveID())
-
         super().userData["Locator"].append([self.locatorID, self.name, self.email, self.phoneNumber, self.ownedCourts]) ## parâmetro self.ownedCourts tem os ID's das quadras
+
+
+    def addCourts(self, courtType, location, pricePerHour, weekend, week_days):
+        court.Court(self, courtType, location, pricePerHour, weekend, week_days)
 
 
 class Renter(User):
