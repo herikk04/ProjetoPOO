@@ -29,7 +29,7 @@ Atributos:
 - courtReservationData (list): Uma lista para armazenar IDs de reservas de todas as quadras.
 
 Métodos:
-- __init__(self, type, location, pricePerHour, week_days, weekend): Inicializa uma instância de Court com os atributos especificados.
+- __init__(self, courtType, location, pricePerHour, week_days, weekend): Inicializa uma instância de Court com os atributos especificados.
 - getDetails(self): Retorna detalhes da quadra, incluindo tipo, localização e preço por hora.
 - checkAvailability(self, date, startTime, endTime): Verifica a disponibilidade da quadra em um determinado horário.
 - bookCourt(self, user, date, startTime, endTime): Reserva a quadra para um usuário em um determinado horário.

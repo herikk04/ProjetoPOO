@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Quadra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            text-align: auto;
+            width: 820px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .hour-selector {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100/24%;
+            justify-content: space-between;
+        }
+        .hour-selector > div {
+            font-size: 14px;
+            display: inline-block;
+            border: 2px solid #646a7088;
+            border-radius: 10%;  
+            text-align: center;
+        }
+        .clickable-div label {
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Adicionar Quadra</h2>
+    <form method="POST" action="/add_courts" id="form">
+        <text hidden="true"></text>
+        <label for="courtType">Tipo:</label>
+        <input type="text" id="courtType" name="courtType" required><br>
+        <label for="location">Localização:</label>
+        <input type="text" id="location" name="location" required><br>
+        <label for="pricePerHour">Preço por Hora:</label>
+        <input type="number" id="pricePerHour" name="pricePerHour" required><br>
+        <label for="hour-selector">Selecione sua Disponibilidade por Hora nos Dias de Semana:</label>
+        <div class="hour-selector" id="hour-selector">
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-0" name="hour-0" value='1'>
+                <label for="hour-0">00:00 às 01:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-1" name="hour-1" value='1'>
+                <label for="hour-1">01:00 às 02:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-2" name="hour-2" value='1'>
+                <label for="hour-2">02:00 às 03:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-3" name="hour-3" value='1'>
+                <label for="hour-3">03:00 às 04:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-4" name="hour-4" value='1'>
+                <label for="hour-4">04:00 às 05:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-5" name="hour-5" value='1'>
+                <label for="hour-5">05:00 às 06:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-6" name="hour-6" value='1'>
+                <label for="hour-6">06:00 às 07:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-7" name="hour-7" value='1'>
+                <label for="hour-7">07:00 às 08:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-8" name="hour-8" value='1'>
+                <label for="hour-8">08:00 às 09:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-9" name="hour-9" value='1'>
+                <label for="hour-9">09:00 às 10:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-10" name="hour-10" value='1'>
+                <label for="hour-10">10:00 às 11:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-11" name="hour-11" value='1'>
+                <label for="hour-11">11:00 às 12:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-12" name="hour-12" value='1'>
+                <label for="hour-12">12:00 às 13:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-13" name="hour-13" value='1'>
+                <label for="hour-13">13:00 às 14:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-14" name="hour-14" value='1'>
+                <label for="hour-14">14:00 às 15:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-15" name="hour-15" value='1'>
+                <label for="hour-15">15:00 às 16:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-16" name="hour-16" value='1'>
+                <label for="hour-16">16:00 às 17:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-17" name="hour-17" value='1'>
+                <label for="hour-17">17:00 às 18:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-18" name="hour-18" value='1'>
+                <label for="hour-18">18:00 às 19:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-19" name="hour-19" value='1'>
+                <label for="hour-19">19:00 às 20:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-20" name="hour-20" value='1'>
+                <label for="hour-20">20:00 às 21:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-21" name="hour-21" value='1'>
+                <label for="hour-21">21:00 às 22:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-22" name="hour-22" value='1'>
+                <label for="hour-22">22:00 às 23:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="hour-23" name="hour-23" value='1'>
+                <label for="hour-23">23:00 às 00:00</label>
+            </div>
+        </div>
+        <label style='padding-top:10px' for="hour-selector">Selecione sua Disponibilidade por Hora no Fim de Semana:</label>
+        <div class="hour-selector" id="hour-selector">
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-0" name="we-hour0" value='1'>
+                <label for="we-hour-0">00:00 às 01:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-1" name="we-hour1" value='1'>
+                <label for="we-hour-1">01:00 às 02:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-2" name="we-hour2" value='1'>
+                <label for="we-hour-2">02:00 às 03:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-3" name="we-hour3" value='1'>
+                <label for="we-hour-3">03:00 às 04:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-4" name="we-hour4" value='1'>
+                <label for="we-hour-4">04:00 às 05:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-5" name="we-hour5" value='1'>
+                <label for="we-hour-5">05:00 às 06:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div".clickable-div label {
+                user-select: none;
+            }>
+                <input type="checkbox" id="we-hour-6" name="we-hour6" value='1'>
+                <label for="we-hour-6">06:00 às 07:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-7" name="we-hour7" value='1'>
+                <label for="we-hour-7">07:00 às 08:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-8" name="we-hour8" value='1'>
+                <label for="we-hour-8">08:00 às 09:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-9" name="we-hour9" value='1'>
+                <label for="we-hour-9">09:00 às 10:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-10" name="we-hour10" value='1'>
+                <label for="we-hour-10">10:00 às 11:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-11" name="we-hour11" value='1'>
+                <label for="we-hour-11">11:00 às 12:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-12" name="we-hour12" value='1'>
+                <label for="we-hour-12">12:00 às 13:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-13" name="we-hour13" value='1'>
+                <label for="we-hour-13">13:00 às 14:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-14" name="we-hour14" value='1'>
+                <label for="we-hour-14">14:00 às 15:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-15" name="we-hour15" value='1'>
+                <label for="we-hour-15">15:00 às 16:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-16" name="we-hour16" value='1'>
+                <label for="we-hour-16">16:00 às 17:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-17" name="we-hour17" value='1'>
+                <label for="we-hour-17">17:00 às 18:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-18" name="we-hour18" value='1'>
+                <label for="we-hour-18">18:00 às 19:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-19" name="we-hour19" value='1'>
+                <label for="we-hour-19">19:00 às 20:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-20" name="we-hour20" value='1'>
+                <label for="we-hour-20">20:00 às 21:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-21" name="we-hour21" value='1'>
+                <label for="we-hour-21">21:00 às 22:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-22" name="we-hour22" value='1'>
+                <label for="we-hour-22">22:00 às 23:00</label>
+            </div>
+            <div class="clickable-div", id="clickable-div">
+                <input type="checkbox" id="we-hour-23" name="we-hour23" value='1'>
+                <label for="we-hour-23">23:00 às 00:00</label>
+            </div>
+        </div>
+        <button type="submit">Adicionar Quadra</button>
+    </form>
+    <script>
+        const checkboxContainer = document.getElementById('hour-selector');
+        const checkboxes = checkboxContainer.querySelectorAll('div input[type="checkbox"]');
+
+        checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            this.value = this.checked ? '1' : '0';
+        });
+
+            checkbox.value = '0'; 
+        });
+        function getRootUrl() {
+            document.getElementById('rootresult').innerHTML += 
+            window.location.origin 
+                ? window.location.origin + '/'
+                : window.location.protocol + '/' + window.location.host + '/';
+        }
+        const form = document.querySelector('#form');
+        form.addEventListener('submit', function onSubmitForm(e) {
+            e.preventDefault();
+            let n = localStorage.getItem('ownedCourtsNum');
+            localStorage.setItem('ownedCourtsNum', n-1);
+            if (n > 0) {
+                const params = new URLSearchParams(window.location.search);
+                const userID = params.get('userID');
+                const userType = params.get('userType');
+                var newURL = window.location.pathname + '?userID=' + userID + '&userType=' + userType;
+                window.location.replace(newURL);
+                window.location.reload();
+            }
+            else if(n==0) {
+                var newURL = '/';
+                window.location.replace(newURL);
+                window.location.reload();
+            }
+        });
+
+        var divs = document.querySelectorAll(".clickable-div");
+        divs.forEach(function(div) {
+            div.addEventListener("click", function() {
+                var checkbox = div.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.click();
+                }
+            });
+        });      
+    </script>
+</body> 
+
+</html>

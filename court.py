@@ -6,10 +6,10 @@ class Court:
     courtReservationData = []
 
 
-    def __init__(self, type, location, pricePerHour, week_days, weekend):
+    def __init__(self, courtType, location, pricePerHour, week_days, weekend):
         self.courtID = self.__class__.ser
         self.__class__.ser+=1
-        self.type = type
+        self.courtType = courtType
         self.location = location
         self.pricePerHour = pricePerHour
         self.agenda = agenda.Agenda(self.courtID, week_days, weekend)
