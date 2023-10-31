@@ -82,6 +82,13 @@
         <button type="submit">Adicionar Locador</button>
         
     </form>
+    <script>
+        document.getElementById("ownedCourtsNum").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const renderCount = document.getElementById("ownedCourtsNum").value;
+            window.location.href = `/add_courts?count=${ownedCourtsNum}?user=${thisUser}`;
+        });
+    </script>
 </body>
 
 </html>
