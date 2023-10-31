@@ -22,16 +22,8 @@ class Locator(User):
         super().userData["Locator"].append([self.locatorID, self.name, self.email, self.phoneNumber, self.ownedCourts]) ## parâmetro self.ownedCourts tem os ID's das quadras
 
 
-    def addCourts(self, ownedCourtsNum):
-        for _ in range(ownedCourtsNum):
-            break
-            type = input()
-            location = input()
-            pricePerHour = input()
-            week_days = input()
-            weekend = input()
-            thiscourt = court.Court(type, location, pricePerHour, week_days, weekend)
-            self.ownedCourts.append(thiscourt.giveID())
+    def addCourts(self, courtType, location, pricePerHour, weekend, week_days):
+        court.Court(self, courtType, location, pricePerHour, weekend, week_days)
 
 
 class Renter(User):

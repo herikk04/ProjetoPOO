@@ -6,18 +6,18 @@ class Agenda:
     
     def __init__(self, aCourt, weekDays, weekend):
         self.agendaID = aCourt
-        wD, wE = (weekDays).split(' '),(weekend).split(' ')
+        wD, wE = weekDays, weekend
         
         for i, timeSlot in list(enumerate(wD)):
-            if timeSlot == '0':
+            if timeSlot == 0:
                 wD[i] = [None, False]
-            elif timeSlot == '1':
+            elif timeSlot == 1:
                 wD[i] = [None, True]
         
         for i, timeSlot in list(enumerate(wE)):
-            if timeSlot == '0':
+            if timeSlot == 0:
                 wE[i] = [None, False]
-            elif timeSlot == '1':
+            elif timeSlot == 1:
                 wE[i] = [None, True]
 
         self.courtAgenda = list(zeros(700))
