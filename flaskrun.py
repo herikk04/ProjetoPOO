@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+import user
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'  # Defina uma chave secreta para a sessão
@@ -31,53 +32,36 @@ def login():
 
 @app.route('/add_user', methods=['GET', 'POST'])
 def add_user():
+
+    return render_template('add_user.html')
+
+
+@app.route('/add_user_locator', methods=['GET', 'POST'])
+def add_user_locator():
     if request.method == 'POST':
+        name = request.form['name']
         username = request.form['username']
         password = request.form['password']
-        user_type = request.form['userType']
+        email = request.form['email']
+        phone_number = request.form['phoneNumber']
+        ownedCourtsNum = request.form['ownedCourtsNum']
 
-        # Check if the username already exists
-        if username in usuarios:
-            error = 'Username already exists. Choose a different username.'
-            
-        else:
-            usuarios[username] = {'username': username, 'password': password}
-            return redirect('/')
-    
-        if user_type == "Locator":
-            return redirect('/add_locator_page')
-        
-        elif user_type == "Renter":
-            # Redirect to the dashboard or any other page for locatarios
-            return redirect('/dashboard')
-        
-        else:
-            error = 'Tipo de usuário inválido. Por favor, selecione Locador ou Locatário.'
+        user.Locator(name, username, password, email, phone_number)
 
-    return render_template('add_user.html', error=None)
+        for _ in range(ownedCourtsNum):
+            return render_template('add_courts.html')
+
+    return render_template('add_user_locator.html')
 
 
-
-@app.route('/add_locator', methods=['POST'])
-def add_locator():
-    name = request.form['name']
-    username = request.form['username']
-    password = request.form['password']
-    email = request.form['email']
-    phone_number = request.form['phoneNumber']
-    owned_courts_num = int(request.form['ownedCourtsNum'])
-
-    locator_data = {
-        'name': name,
-        'username': username,
-        'password': password,
-        'email': email,
-        'phone_number': phone_number,
-        'owned_courts_num': owned_courts_num
-    }
-
-    return redirect('/')
-
+@app.route('/add_court', methods=['GET', 'POST'])
+def add_court():
+    if request.method == 'POST':
+        type = request.form['type'] 
+        location = request.form['location'] 
+        pricePerHour = request.form['pricePerHour']
+        week_days = request.form['week_days']
+        weekend = request.form['weekend']
 
 @app.route('/dashboard')
 def dashboard():
