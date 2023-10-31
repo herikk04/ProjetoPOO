@@ -28,7 +28,8 @@ class User:
     def getUserObject(__class__, userType, userID):
         if userType == "Locator":
 
-            return __class__.userData["Locator"][0][0]["object"]
+            return __class__.userData["Locator"][userID]["object"]
+        
         elif userType == "Renter":
 
             return __class__.userData["Renter"][0][0]["object"]
@@ -43,10 +44,11 @@ class Locator(User):
         self.__class__.ser+=1
         self.ownedCourts = []
         self.object = self
-        super().userData["Locator"].append([self.__dict__]) ## parâmetro self.ownedCourts tem os ID's das quadras
+        super().userData["Locator"].append(self.__dict__) ## parâmetro self.ownedCourts tem os ID's das quadras
 
 
     def addCourts(self, courtType, location, pricePerHour, weekend, week_days):
+        print("OI")
         court.Court(self, courtType, location, pricePerHour, weekend, week_days)
 
 
@@ -76,8 +78,4 @@ class Renter(User):
     def getRenterName(__class__, userID):  ## TALVEZ SERÁ PASSADO PARA A CLASSE MÃE
         
         return super().userData["Renter"]
-    
 
-    
-
-    

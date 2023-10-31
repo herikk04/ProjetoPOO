@@ -66,7 +66,7 @@
 
 <body>
     <h2>Adicionar Novo Locador</h2>
-    <form method="POST" action="/add_user_locator">
+    <form method="POST" action="/add_user_locator" id="form">
         <label for="name">Nome:</label>
         <input type="text" id="name" name="name" required><br>
         <label for="username">Nome de Usuário:</label>
@@ -83,11 +83,15 @@
         
     </form>
     <script>
-        document.getElementById("ownedCourtsNum").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const renderCount = document.getElementById("ownedCourtsNum").value;
-            window.location.href = `/add_courts?count=${ownedCourtsNum}?user=${thisUser}`;
-        });
+        localStorage.clear()
+
+        const form = document.querySelector("#form");
+
+        form.addEventListener('submit', (event) => {
+            const ownedCourtsNum = document.getElementById('ownedCourtsNum').value;
+            console.log(ownedCourtsNum)
+            localStorage.setItem('ownedCourtsNum', ownedCourtsNum);
+        })
     </script>
 </body>
 

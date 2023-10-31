@@ -44,16 +44,13 @@ def add_user_locator():
         password = request.form['password']
         email = request.form['email']
         phone_number = request.form['phoneNumber']
-        ownedCourtsNum = int(request.form['ownedCourtsNum'])
 
         thisUser = user.Locator(name, email, phone_number, username, password)
         userID = thisUser.getSelfUserID()
         userType = thisUser.getSelfType()
-        print(thisUser.__dict__)
-        print(user.User.userData)
-        print(user.User.getUserObject(userType, userID))
 
-        return redirect(url_for('add_courts', userID=userID, userType=userType, ownedCourtsNum=ownedCourtsNum))
+
+        return redirect(url_for('add_courts', userID=userID, userType=userType))
 
     return render_template('add_user_locator.html')
 
@@ -66,7 +63,7 @@ def add_courts(): ## PARAMETROS DE ENTRADA: userType, userID não estão sendo r
         userType = request.args.get('userType')
         ownedCourtsNum = int(ownedCourtsNum) if ownedCourtsNum is not None else 0
 
-        return render_template('add_courts.html', userID=userID, userType=userType, ownedCourtsNum=ownedCourtsNum)
+        return render_template('add_courts.html', userID=userID, userType=userType)
     elif request.method == 'POST':
         ownedCourtsNum = int(request.args.get('ownedCourtsNum', 0))
         userID = request.args.get('userID')
@@ -131,7 +128,7 @@ def add_courts(): ## PARAMETROS DE ENTRADA: userType, userID não estão sendo r
         print(thisUser)
         thisUser.addCourts(courtType, location, pricePerHour, weekend, weedDays)
     
-        return render_template('add_courts.html', userID=userID, userType=userType, ownedCourtsNum=ownedCourtsNum)
+        return render_template('add_courts.html', userID=userID, userType=userType)
     else:
         # Handle the case where thisUser is None, possibly by redirecting or showing an error message
         return "Invalid request."
