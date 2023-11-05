@@ -50,7 +50,7 @@ def add_user_locator():
         phone_number = request.form['phoneNumber']
 
         thisUser = user.Locator(name, email, phone_number, username, password)
-        userID = thisUser.getSelfUserID()
+        userID = thisUser.getID()
         userType = thisUser.getSelfType()
 
 
@@ -124,6 +124,7 @@ def add_courts():
         we_hour_23 = int(data.get("we_hour-23", 0))
         weedDays = [hour_0, hour_1, hour_2, hour_3, hour_4, hour_5, hour_6, hour_7, hour_8, hour_9, hour_10, hour_11, hour_12, hour_13, hour_14, hour_15, hour_16, hour_17, hour_18, hour_19, hour_20, hour_21, hour_22, hour_23]
         weekend = [we_hour_0, we_hour_1, we_hour_2, we_hour_3, we_hour_4, we_hour_5, we_hour_6, we_hour_7, we_hour_8, we_hour_9, we_hour_10, we_hour_11, we_hour_12, we_hour_13, we_hour_14, we_hour_15, we_hour_16, we_hour_17, we_hour_18, we_hour_19, we_hour_20, we_hour_21, we_hour_22, we_hour_23]
+        print("______________________________________")
         print(f"userID: {userID}, userType: {userType}")
         thisUser = user.User.getUserObject(userType, userID)
         print(thisUser)

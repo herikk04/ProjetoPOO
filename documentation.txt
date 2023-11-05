@@ -49,7 +49,7 @@ Classe Agenda:
 - A classe Agenda é usada para criar instâncias de agendas de quadras esportivas e gerenciar seus dados.
 
 Atributos:
-- courtAgendaData (list): Uma lista que armazena as agendas das quadras.
+- agendaData (list): Uma lista que armazena as agendas das quadras.
 
 Métodos:
 - __init__(self, aCourt, weekDays, weekend): Inicializa uma instância de Agenda com a agenda de uma quadra específica.
