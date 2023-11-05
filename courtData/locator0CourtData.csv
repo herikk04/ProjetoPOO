@@ -1,0 +1,4 @@
+courtID,locatorID,courtType,location,pricePerHour,agendaID
+0,0,Basquete,Av. Palmeiras,50,0
+1,0,Tenis,Av. Palmeiras,100,1
+2,0,Futebol,Rua 4,200,2
