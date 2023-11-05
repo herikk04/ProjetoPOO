@@ -5,94 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Locador</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            justify-content: center;
-        }
-        
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        form {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-            text-align: auto;
-            width: 300px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        input, select {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        button {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 12px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        button:hover {
-            background-color: #45a049;
-        }        
-    </style>
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/add_user_locator_styles.css')}}">
 </head>
 
 <body>
     <h2>Adicionar Novo Locador</h2>
-    <form method="POST" action="/add_user_locator" id="form">
+    <form method="POST" action="/add_user_locator" id="form-add-user-locator">
         <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="name" required autocomplete="name"><br>
         <label for="username">Nome de Usuário:</label>
-        <input type="text" id="username" name="username" required><br>
+        <input type="text" id="username" name="username" required autocomplete="username"><br>
         <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required><br>
+        <input type="password" id="password" name="password" required autocomplete="current-password"><br>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email" required autocomplete="email"><br>
         <label for="phoneNumber">Número de Telefone:</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" required><br>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required autocomplete="tel-national"><br>
         <label for="ownedCourtsNum">Quantidade de quadras possuída:</label>
         <input type="number" id="ownedCourtsNum" name="ownedCourtsNum" required><br>
         <button type="submit">Adicionar Locador</button>
         
     </form>
-    <script>
-        localStorage.clear()
-
-        const form = document.querySelector("#form");
-
-        form.addEventListener('submit', (event) => {
-            const ownedCourtsNum = document.getElementById('ownedCourtsNum').value;
-            console.log(ownedCourtsNum)
-            localStorage.setItem('ownedCourtsNum', ownedCourtsNum);
-        })
-    </script>
+    <script src="{{ url_for('static',filename='script/script.js') }}"></script>
 </body>
 
 </html>
