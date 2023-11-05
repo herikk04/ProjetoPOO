@@ -4,15 +4,33 @@ import reservation, user, agenda
 class Court:
     ser = 0
     courtReservationData = []
+    courtData = []
 
 
-    def __init__(self, courtType, location, pricePerHour, week_days, weekend):
+    def __init__(self, locatorID, courtType, location, pricePerHour, week_days, weekend):
         self.courtID = self.__class__.ser
         self.__class__.ser+=1
+        self.locatorID = locatorID
         self.courtType = courtType
         self.location = location
         self.pricePerHour = pricePerHour
         self.agenda = agenda.Agenda(self.courtID, week_days, weekend)
+        print(f"Court {self.courtID} created")
+        print(f"Court {self.courtID} data: {self.__dict__}")
+
+        userexsits = False
+
+        for locatordata in __class__.courtData:
+            if locatorID in locatordata:
+                userexsits = True
+                break
+        
+        if userexsits: 
+            __class__.courtData[0][self.locatorID].append(self.__dict__) 
+            user.User.getUserObject("Locator", self.locatorID).ownedCourts.append(self.courtID)
+        else:
+            __class__.courtData.append({self.locatorID: [self.__dict__]})
+            user.User.getUserObject("Locator", self.locatorID).ownedCourts.append(self.courtID)
 
 
     def bookCourt(self, userID, date, startTime, endTime):
@@ -35,7 +53,7 @@ class Court:
 
             return False
     
-    def giveID(self):
+    def getCourtID(self):
 
         return self.courtID
 

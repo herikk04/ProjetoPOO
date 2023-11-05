@@ -29,6 +29,8 @@ class Agenda:
             self.courtAgenda[i+4] = wD.copy()
             self.courtAgenda[i+5] = wE.copy()
             self.courtAgenda[i+6] = wE.copy()
+        
+        print(f"Agenda {self.agendaID} created")
 
         self.__class__.courtAgendaData.append(self.courtAgenda)
 
