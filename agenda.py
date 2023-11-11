@@ -7,7 +7,7 @@ class Agenda:
 
     ## PARECE TER UM ERRO NA CRIAÇÃO DE AGENDAS, VERIFICAR PARA DIAS DA SEMANA --  scripts.js, flaskrun.py
     def __init__(self, aCourt, weekDays, weekend):
-        self.agendaID = aCourt
+        self.__agendaID = aCourt
         wD, wE = weekDays, weekend
         
         for i, timeSlot in list(enumerate(wD)):
@@ -38,7 +38,11 @@ class Agenda:
         ## create csv for each agenda
         newAgendaData = pd.DataFrame(self.__dict__)
         newAgendaData.to_csv(f"agendaData/agendaData{self.agendaID}.csv", index=False)
+    
+    @property
+    def agendaID(self):
 
+        return self.__agendaID
 
     @classmethod
     def getAgenda(__class__, agendaID):

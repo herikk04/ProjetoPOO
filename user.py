@@ -15,19 +15,32 @@ class User:
         firstRun = False
 
     def __init__(self, name, email, phoneNumber, username, password):
-        self.userType = None
-        self.name = name
-        self.email = email
+        self.__name = name
+        self.__email = email
         self.phoneNumber = phoneNumber
-        self.username = username
+        self.__username = username
         self.password = password
         print("______________________________________")
         print(f"User created")
 
+    @property
+    def name(self):
+            
+            return self.__name
+    
+    @property
+    def email(self):
+                
+            return self.__email
+    
+    @property
+    def username(self):
+                    
+            return self.__username
+
     def getSelfType(self):
             
         return self.userType
-
 
     @classmethod
     def updateUserData(__class__, userType):
@@ -55,8 +68,8 @@ class Locator(User):
 
     def __init__(self, name, email, phoneNumber, username, password): ## TERMINAR A LÓGICA DE SENHA E USUÁRIO
         super(Locator,self).__init__(name, email, phoneNumber, username, password)
-        self.userType = "Locator"
-        self.locatorID = self.__class__.locatorSer
+        self.__userType = "Locator"
+        self.__locatorID = self.__class__.locatorSer
         self.__class__.locatorSer+=1
         self.ownedCourts = []
         self.object = self
@@ -66,6 +79,15 @@ class Locator(User):
         print(f"Locator {self.locatorID} data: {self.__dict__}")
         super().updateUserData("Locator")
 
+    @property  
+    def locatorID(self):
+            
+        return self.__locatorID
+    
+    @property
+    def userType(self):
+         
+         return self.__userType
 
     def addCourts(self, courtType, location, pricePerHour, weekend, week_days):
         thisCourt = court.Court(self.locatorID, courtType, location, pricePerHour, weekend, week_days)
@@ -84,8 +106,8 @@ class Renter(User):
 
     def __init__(self, name, email, phoneNumber, username, password,):
         super().__init__(name, email, phoneNumber, username, password)
-        self.userType = "Renter"
-        self.renterID = self.__class__.renterSer
+        self.__userType = "Renter"
+        self.__renterID = self.__class__.renterSer
         self.__class__.renterSer+=1
         self.reservations = []
         self.object = self
@@ -95,6 +117,16 @@ class Renter(User):
         print(f"Renter {self.renterID} data: {self.__dict__}")
         super().updateUserData("Renter")
 
+    @property
+    def renterID(self):
+            
+        return self.__renterID
+    
+    @property
+    def userType(self):
+         
+         return self.__userType
+
     @classmethod
     def registerReservation(__class__, reservationID, userID):
         super().userData["Renter"][userID]["reservations"].append(reservationID)
@@ -103,8 +135,8 @@ class Renter(User):
 
     @classmethod
     def unregisterReservation(__class__, reservationID, userID):
-        del super().userData["Renter"][userID]["reservations"] ## PRECISA SER OBSERVADO --> NA HORA DE REMOVER A RESERVA CERTA
-        super().updateUserData("Renter")
+        del super().userData["Renter"][userID]["reservations"] ## PRECISO DE UM ID DE RESERVA PARA CADA USUÁRIO: MOSTRA ONDE ESTÁ A RESERVA EM SELF.RESERVATIONS
+        super().updateUserData("Renter")                       ## PENSAR EM UMA LÓGICA PARA DELETAR A RESERVA
     
     
     @classmethod

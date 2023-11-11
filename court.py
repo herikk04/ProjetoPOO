@@ -1,3 +1,4 @@
+from typing import Any
 import reservation, user, agenda
 import pandas as pd
 
@@ -8,11 +9,11 @@ class Court:
 
 
     def __init__(self, locatorID, courtType, location, pricePerHour, week_days, weekend):
-        self.courtID = self.__class__.ser
+        self.__courtID = self.__class__.ser
         self.__class__.ser+=1
-        self.locatorID = locatorID
-        self.courtType = courtType
-        self.location = location
+        self.__locatorID = locatorID
+        self.__courtType = courtType
+        self.__location = location
         self.pricePerHour = pricePerHour
         thisAgenda = agenda.Agenda(self.courtID, week_days, weekend)
         self.agendaID = thisAgenda.agendaID
@@ -39,6 +40,25 @@ class Court:
         
         __class__.updateCourtData(self.locatorID)
     
+    @property
+    def courtID(self):
+
+        return self.__courtID
+    
+    @property
+    def locatorID(self):
+
+        return self.__locatorID
+    
+    @property
+    def courtType(self):
+
+        return self.__courtType
+    
+    @property
+    def location(self):
+
+        return self.__location
 
     @classmethod
     def updateCourtData(__class__, locatorID):
@@ -50,11 +70,9 @@ class Court:
 
     def bookCourt(self, userID, date, startTime, endTime):
         if self.checkAvailability(date, startTime, endTime) == True:
-            thisreservation = reservation.Reservation(self.courtID, user.Locator.getRenterName(userID), date, startTime, endTime)
-            agenda.Agenda.updateAgenda(self.courtID, date, startTime, endTime, [user, False])
-            
-            __class__.courtReservationData.append(thisreservation.getResID(self.courtID)) ## Guardar os courtID's de reserva em todos os objetos User
-            user.Renter.registerReservation(thisreservation.getResID(self.courtID))
+            thisreservation = reservation.Reservation(self.courtID, userID, user.Renter.getRenterName(userID), date, startTime, endTime)
+            agenda.Agenda.updateAgenda(self.courtID, date, startTime, endTime, [user.Renter.getRenterName(userID), False])
+            user.Renter.registerReservation(thisreservation.getResID(self.courtID), userID)
         else:
             
             return False
