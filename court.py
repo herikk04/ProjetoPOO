@@ -4,32 +4,26 @@ import pandas as pd
 class Court:
     ser = 0
     courtReservationData = []
-    courtData = []
+    courtData = {}
 
 
-    def __init__(self, locatorID, courtType, location, pricePerHour, week_days, weekend):
-        self.courtID = self.__class__.ser
+    def __init__(self, locatorID, courtType, location, pricePerHour, courtagenda):
+        self.__courtID = self.__class__.ser
         self.__class__.ser+=1
-        self.locatorID = locatorID
-        self.courtType = courtType
-        self.location = location
+        self.__locatorID = locatorID
+        self.__courtType = courtType
+        self.__location = location
         self.pricePerHour = pricePerHour
-        thisAgenda = agenda.Agenda(self.courtID, week_days, weekend)
+        thisAgenda = agenda.Agenda(self.courtID, courtagenda)
         self.agendaID = thisAgenda.agendaID
-        
 
-        userexsits = False
-
-        for locatordata in __class__.courtData:
-            if locatorID in locatordata:
-                userexsits = True
-                break
+        userexsits = self.locatorID in list(__class__.courtData.keys())
         
         if userexsits: 
-            __class__.courtData[0][self.locatorID].append(self.__dict__) 
+            __class__.courtData[self.locatorID][self.courtID] = self.__dict__ 
             user.User.getUserObject("Locator", self.locatorID).ownedCourts.append(self.courtID)
         else:
-            __class__.courtData.append({self.locatorID: [self.__dict__]})
+            __class__.courtData[self.locatorID] = {self.courtID : self.__dict__} ## VERIFICAR SE ESTÁ FUNCIONANDO ( )
             user.User.getUserObject("Locator", self.locatorID).ownedCourts.append(self.courtID)
 
         print("______________________________________")
@@ -37,24 +31,42 @@ class Court:
         print(f"Court {self.courtID} data: {self.__dict__}")
         print(f"Court Data: {__class__.courtData}")
         
-        __class__.updateCourtData(self.locatorID)
+        __class__.updateCourtData(self.locatorID, self.courtID, userexsits)
     
+    @property
+    def courtID(self):
+
+        return self.__courtID
+    
+    @property
+    def locatorID(self):
+
+        return self.__locatorID
+    
+    @property
+    def courtType(self):
+
+        return self.__courtType
+    
+    @property
+    def location(self):
+
+        return self.__location
 
     @classmethod
-    def updateCourtData(__class__, locatorID):
+    def updateCourtData(__class__, locatorID, courtID, userexsits):
         ## create csv for each locator
-        newCourtData = pd.DataFrame(__class__.courtData[0][locatorID])
+        newCourtData = pd.DataFrame(__class__.courtData[locatorID][courtID], index=[courtID] )
+        if userexsits:
+            oldCourtData = pd.read_csv(f"courtData/locator{locatorID}CourtData.csv")
+            newCourtData = pd.concat([oldCourtData, newCourtData], ignore_index=True)
         newCourtData.to_csv(f"courtData/locator{locatorID}CourtData.csv", index=False)
-        
-
 
     def bookCourt(self, userID, date, startTime, endTime):
         if self.checkAvailability(date, startTime, endTime) == True:
-            thisreservation = reservation.Reservation(self.courtID, user.Locator.getRenterName(userID), date, startTime, endTime)
-            agenda.Agenda.updateAgenda(self.courtID, date, startTime, endTime, [user, False])
-            
-            __class__.courtReservationData.append(thisreservation.getResID(self.courtID)) ## Guardar os courtID's de reserva em todos os objetos User
-            user.Renter.registerReservation(thisreservation.getResID(self.courtID))
+            thisreservation = reservation.Reservation(self.courtID, userID, user.Renter.getRenterName(userID), date, startTime, endTime)
+            agenda.Agenda.updateAgenda(self.courtID, date, startTime, endTime, [user.Renter.getRenterName(userID), False])
+            user.Renter.registerReservation(thisreservation.getResID(self.courtID), userID)
         else:
             
             return False
@@ -85,3 +97,4 @@ class Court:
     def getDetails(__class__, courtID):
 
         return __class__.courtReservationData[courtID]
+    

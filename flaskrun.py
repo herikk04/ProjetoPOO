@@ -1,6 +1,45 @@
 from flask import Flask, render_template, request, redirect, session, url_for, Response, jsonify
-import user
-import json       
+import user, dataRecover
+from pandas import read_csv, DataFrame
+import os
+
+def clearTerminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def dataManagement():
+    firstRun = True
+    try: 
+        locatorData = read_csv("userData/locatorData.csv")
+        if not locatorData.empty:
+            print("______________________________________")
+            print("Recovering locator data...")
+            firstRun = False
+
+    except: 
+        print("locator data not found...")
+    
+    try:    
+        renterData = read_csv("userData/renterData.csv")
+        if not renterData.empty:
+            print("______________________________________")
+            print("Recovering renter data...")
+            firstRun = False
+        
+                  
+    except: 
+        print("renter data not found...")
+    
+    if not firstRun:
+        dataRecover.recoverLocatorObjects()
+        dataRecover.recoverRenterObjects()
+
+    if firstRun:
+        print("______________________________________")
+        print("Creating user first csv files...")
+        locatorData = DataFrame(user.User.userData["Locator"],columns=["userType", "name", "email", "phoneNumber", "username", "password", "ownedCourts"])
+        renterData = DataFrame(user.User.userData["Renter"], columns=["userType", "name", "email", "phoneNumber", "username", "password", "reservations"])
+        locatorData.to_csv("userData/locatorData.csv", index=False)
+        renterData.to_csv("userData/renterData.csv", index=False)
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'  # Defina uma chave secreta para a sessão
@@ -74,61 +113,62 @@ def add_courts():
         courtType = data.get('courtType') 
         location = data.get('location') 
         pricePerHour = int(data.get('pricePerHour'))
-        hour_0 = int(data.get("hour-0", 0))
-        hour_1 = int(data.get("hour-1", 0))
-        hour_2 = int(data.get("hour-2", 0))
-        hour_3 = int(data.get("hour-3", 0))
-        hour_4 = int(data.get("hour-4", 0))
-        hour_5 = int(data.get("hour-5", 0))
-        hour_6 = int(data.get("hour-6", 0))
-        hour_7 = int(data.get("hour-7", 0))
-        hour_8 = int(data.get("hour-8", 0))
-        hour_9 = int(data.get("hour-9", 0))
-        hour_10 = int(data.get("hour-10", 0))
-        hour_11 = int(data.get("hour-11", 0))
-        hour_12 = int(data.get("hour-12", 0))
-        hour_13 = int(data.get("hour-13", 0))
-        hour_14 = int(data.get("hour-14", 0))
-        hour_15 = int(data.get("hour-15", 0))
-        hour_16 = int(data.get("hour-16", 0))
-        hour_17 = int(data.get("hour-17", 0))
-        hour_18 = int(data.get("hour-18", 0))
-        hour_19 = int(data.get("hour-19", 0))
-        hour_20 = int(data.get("hour-20", 0))
-        hour_21 = int(data.get("hour-21", 0))
-        hour_22 = int(data.get("hour-22", 0))
-        hour_23 = int(data.get("hour-23", 0))
-        we_hour_0 = int(data.get("we_hour-0", 0))
-        we_hour_1 = int(data.get("we_hour-1", 0))
-        we_hour_2 = int(data.get("we_hour-2", 0))
-        we_hour_3 = int(data.get("we_hour-3", 0))
-        we_hour_4 = int(data.get("we_hour-4", 0))
-        we_hour_5 = int(data.get("we_hour-5", 0))
-        we_hour_6 = int(data.get("we_hour-6", 0))
-        we_hour_7 = int(data.get("we_hour-7", 0))
-        we_hour_8 = int(data.get("we_hour-8", 0))
-        we_hour_9 = int(data.get("we_hour-9", 0))
-        we_hour_10 = int(data.get("we_hour-10", 0))
-        we_hour_11 = int(data.get("we_hour-11", 0))
-        we_hour_12 = int(data.get("we_hour-12", 0))
-        we_hour_13 = int(data.get("we_hour-13", 0))
-        we_hour_14 = int(data.get("we_hour-14", 0))
-        we_hour_15 = int(data.get("we_hour-15", 0))
-        we_hour_16 = int(data.get("we_hour-16", 0))
-        we_hour_17 = int(data.get("we_hour-17", 0))
-        we_hour_18 = int(data.get("we_hour-18", 0))
-        we_hour_19 = int(data.get("we_hour-19", 0))
-        we_hour_20 = int(data.get("we_hour-20", 0))
-        we_hour_21 = int(data.get("we_hour-21", 0))
-        we_hour_22 = int(data.get("we_hour-22", 0))
-        we_hour_23 = int(data.get("we_hour-23", 0))
+        hour_0 = int(data.get("hour-0"))
+        hour_1 = int(data.get("hour-1"))
+        hour_2 = int(data.get("hour-2"))
+        hour_3 = int(data.get("hour-3"))
+        hour_4 = int(data.get("hour-4"))
+        hour_5 = int(data.get("hour-5"))
+        hour_6 = int(data.get("hour-6"))
+        hour_7 = int(data.get("hour-7"))
+        hour_8 = int(data.get("hour-8"))
+        hour_9 = int(data.get("hour-9"))
+        hour_10 = int(data.get("hour-10"))
+        hour_11 = int(data.get("hour-11"))
+        hour_12 = int(data.get("hour-12"))
+        hour_13 = int(data.get("hour-13"))
+        hour_14 = int(data.get("hour-14"))
+        hour_15 = int(data.get("hour-15"))
+        hour_16 = int(data.get("hour-16"))
+        hour_17 = int(data.get("hour-17"))
+        hour_18 = int(data.get("hour-18"))
+        hour_19 = int(data.get("hour-19"))
+        hour_20 = int(data.get("hour-20"))
+        hour_21 = int(data.get("hour-21"))
+        hour_22 = int(data.get("hour-22"))
+        hour_23 = int(data.get("hour-23"))
+        we_hour_0 = int(data.get("we-hour-0"))
+        we_hour_1 = int(data.get("we-hour-1"))
+        we_hour_2 = int(data.get("we-hour-2"))
+        we_hour_3 = int(data.get("we-hour-3"))
+        we_hour_4 = int(data.get("we-hour-4"))
+        we_hour_5 = int(data.get("we-hour-5"))
+        we_hour_6 = int(data.get("we-hour-6"))
+        we_hour_7 = int(data.get("we-hour-7"))
+        we_hour_8 = int(data.get("we-hour-8"))
+        we_hour_9 = int(data.get("we-hour-9"))
+        we_hour_10 = int(data.get("we-hour-10"))
+        we_hour_11 = int(data.get("we-hour-11"))
+        we_hour_12 = int(data.get("we-hour-12"))
+        we_hour_13 = int(data.get("we-hour-13"))
+        we_hour_14 = int(data.get("we-hour-14"))
+        we_hour_15 = int(data.get("we-hour-15"))
+        we_hour_16 = int(data.get("we-hour-16"))
+        we_hour_17 = int(data.get("we-hour-17"))
+        we_hour_18 = int(data.get("we-hour-18"))
+        we_hour_19 = int(data.get("we-hour-19"))
+        we_hour_20 = int(data.get("we-hour-20"))
+        we_hour_21 = int(data.get("we-hour-21"))
+        we_hour_22 = int(data.get("we-hour-22"))
+        we_hour_23 = int(data.get("we-hour-23"))
         weedDays = [hour_0, hour_1, hour_2, hour_3, hour_4, hour_5, hour_6, hour_7, hour_8, hour_9, hour_10, hour_11, hour_12, hour_13, hour_14, hour_15, hour_16, hour_17, hour_18, hour_19, hour_20, hour_21, hour_22, hour_23]
         weekend = [we_hour_0, we_hour_1, we_hour_2, we_hour_3, we_hour_4, we_hour_5, we_hour_6, we_hour_7, we_hour_8, we_hour_9, we_hour_10, we_hour_11, we_hour_12, we_hour_13, we_hour_14, we_hour_15, we_hour_16, we_hour_17, we_hour_18, we_hour_19, we_hour_20, we_hour_21, we_hour_22, we_hour_23]
         print("______________________________________")
         print(f"userID: {userID}, userType: {userType}")
         thisUser = user.User.getUserObject(userType, userID)
         print(thisUser)
-        thisUser.addCourts(courtType, location, pricePerHour, weekend, weedDays)
+        courtagenda = dataRecover.filterAgendaData(weedDays, weekend)
+        thisUser.addCourts(courtType, location, pricePerHour, courtagenda)
     
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
     else:
@@ -156,4 +196,6 @@ def user_created():
 
 
 if __name__ == '__main__':
+    clearTerminal()
+    dataManagement()
     app.run(debug=True, port='8080')

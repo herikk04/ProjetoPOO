@@ -1,18 +1,9 @@
-import court, flaskrun
+import agenda, dataRecover, court, flaskrun
 import pandas as pd
+
 
 class User:
     userData = {"Locator": [], "Renter": []}
-    firstRun = True
-
-    if firstRun:
-        print("______________________________________")
-        print("Creating user first csv files...")
-        locatorData = pd.DataFrame(userData["Locator"],columns=["userType", "name", "email", "phoneNumber", "username", "password", "ownedCourts"])
-        renterData = pd.DataFrame(userData["Renter"], columns=["userType", "name", "email", "phoneNumber", "username", "password", "reservations"])
-        locatorData.to_csv("locatorData.csv", index=False)
-        renterData.to_csv("renterData.csv", index=False)
-        firstRun = False
 
     def __init__(self, name, email, phoneNumber, username, password):
         self.userType = None
@@ -33,11 +24,11 @@ class User:
     def updateUserData(__class__, userType):
         if userType == "Locator":
             newLocatorData = pd.DataFrame(__class__.userData["Locator"], columns=["userType", "name", "email", "phoneNumber", "username", "password", "ownedCourts"])
-            newLocatorData.to_csv("locatorData.csv", index=False)
+            newLocatorData.to_csv("userData/locatorData.csv", index=False)
             
         elif userType == "Renter":
             newRenterData = pd.DataFrame(__class__.userData["Renter"], columns=["userType", "name", "email", "phoneNumber", "username", "password", "reservations"])
-            newRenterData.to_csv("renterData.csv", index=False)
+            newRenterData.to_csv("userData/renterData.csv", index=False)
 
 
     @classmethod
@@ -66,9 +57,8 @@ class Locator(User):
         print(f"Locator {self.locatorID} data: {self.__dict__}")
         super().updateUserData("Locator")
 
-
-    def addCourts(self, courtType, location, pricePerHour, weekend, week_days):
-        thisCourt = court.Court(self.locatorID, courtType, location, pricePerHour, weekend, week_days)
+    def addCourts(self, courtType, location, pricePerHour, courtagenda):
+        thisCourt = court.Court(self.locatorID, courtType, location, pricePerHour, courtagenda)
         print("______________________________________")
         print(f"Locator {self.locatorID} added court {thisCourt.getCourtID()}")
         super().updateUserData("Locator")

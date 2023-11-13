@@ -1,0 +1,3 @@
+userType,name,email,phoneNumber,username,password,ownedCourts
+Locator,Mateus,mateus.lacerda@ufg.discente.br,62995762902,mateus_lacerda,1234,"[0, 1]"
+Locator,Mateus,mateus.lacerda@ufg.discente.br,62995762902,mateus_lacerda,123,[]

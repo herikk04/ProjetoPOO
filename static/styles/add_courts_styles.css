@@ -70,6 +70,16 @@ button[type="submit"]:hover {
     text-align: center;
 }
 
+.hour-selector > div:hover {
+    font-size: 14px;
+    display: inline-block;
+    border: 2px solid #646a7088;
+    border-radius: 10%;  
+    background-color: #646a7088;
+    color: white;
+    cursor: pointer;
+}
+
 .clickable-div label {
     user-select: none;
 }
