@@ -1,6 +1,45 @@
 from flask import Flask, render_template, request, redirect, session, url_for, Response, jsonify
-import user
-import json       
+import user, dataRecover
+from pandas import read_csv, DataFrame
+import os
+
+def clearTerminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def dataManagement():
+    firstRun = True
+    try: 
+        locatorData = read_csv("userData/locatorData.csv")
+        if not locatorData.empty:
+            print("______________________________________")
+            print("Recovering locator data...")
+            firstRun = False
+
+    except: 
+        print("locator data not found...")
+    
+    try:    
+        renterData = read_csv("userData/renterData.csv")
+        if not renterData.empty:
+            print("______________________________________")
+            print("Recovering renter data...")
+            firstRun = False
+        
+                  
+    except: 
+        print("renter data not found...")
+    
+    if not firstRun:
+        dataRecover.recoverLocatorObjects()
+        dataRecover.recoverRenterObjects()
+
+    if firstRun:
+        print("______________________________________")
+        print("Creating user first csv files...")
+        locatorData = DataFrame(user.User.userData["Locator"],columns=["userType", "name", "email", "phoneNumber", "username", "password", "ownedCourts"])
+        renterData = DataFrame(user.User.userData["Renter"], columns=["userType", "name", "email", "phoneNumber", "username", "password", "reservations"])
+        locatorData.to_csv("userData/locatorData.csv", index=False)
+        renterData.to_csv("userData/renterData.csv", index=False)
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'  # Defina uma chave secreta para a sessão
@@ -128,7 +167,8 @@ def add_courts():
         print(f"userID: {userID}, userType: {userType}")
         thisUser = user.User.getUserObject(userType, userID)
         print(thisUser)
-        thisUser.addCourts(courtType, location, pricePerHour, weedDays, weekend)
+        courtagenda = dataRecover.filterAgendaData(weedDays, weekend)
+        thisUser.addCourts(courtType, location, pricePerHour, courtagenda)
     
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
     else:
@@ -156,4 +196,6 @@ def user_created():
 
 
 if __name__ == '__main__':
+    clearTerminal()
+    dataManagement()
     app.run(debug=True, port='8080')
