@@ -1,1 +1,1 @@
-userType,name,email,phoneNumber,username,password,reservations
+userType,name,email,phoneNumber,username,password,renterID,reservations,object

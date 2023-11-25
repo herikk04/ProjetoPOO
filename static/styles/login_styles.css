@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    font-family: 'Montserrat', sans-serif; /* Fonte Principal */
+    background-color: #007BFF; /* Azul Vibrante */
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,7 +10,7 @@ body {
 }
 
 .login-container {
-    background-color: #ffffff;
+    background-color: #FFFFFF; /* Branco */
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -18,16 +18,17 @@ body {
 }
 
 .login-form input {
+    justify-content: center;
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #CCCCCC; /* Cinza Neutro */
     border-radius: 5px;
     font-size: 16px;
 }
 
 .login-form button {
-    background-color: #4caf50;
+    background-color: #2ecc71; /* Verde Esportivo */
     color: white;
     border: none;
     border-radius: 5px;
@@ -42,7 +43,7 @@ body {
 }
 
 .button-container button {
-    background-color: #007bff;
+    background-color: #007BFF; /* Azul Vibrante */
     color: white;
     border: none;
     border-radius: 5px;

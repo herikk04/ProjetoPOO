@@ -1,10 +1,7 @@
-from flask import Flask, render_template, request, redirect, session, url_for, Response, jsonify
-import user, dataRecover
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify
+import user, dataRecover, locator, renter
 from pandas import read_csv, DataFrame
-import os
 
-def clearTerminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 def dataManagement():
     firstRun = True
@@ -30,21 +27,22 @@ def dataManagement():
         print("renter data not found...")
     
     if not firstRun:
-        dataRecover.recoverLocatorObjects()
-        dataRecover.recoverRenterObjects()
+        dataRecover.DataRecover.recoverLocatorObjects()
+        dataRecover.DataRecover.recoverRenterObjects()
 
     if firstRun:
         print("______________________________________")
-        print("Creating user first csv files...")
-        locatorData = DataFrame(user.User.userData["Locator"],columns=["userType", "name", "email", "phoneNumber", "username", "password", "ownedCourts"])
-        renterData = DataFrame(user.User.userData["Renter"], columns=["userType", "name", "email", "phoneNumber", "username", "password", "reservations"])
+        print("Creating user first csv files...") 
+        locatorData = DataFrame(user.User.userData["Locator"],columns=["userType","name","email","phoneNumber","username","password","locatorID","ownedCourts","object"])
+        renterData = DataFrame(user.User.userData["Renter"], columns=["userType","name","email","phoneNumber","username","password","renterID","reservations","object"])
         locatorData.to_csv("userData/locatorData.csv", index=False)
         renterData.to_csv("userData/renterData.csv", index=False)
 
-app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta'  # Defina uma chave secreta para a sessão
 
-# Dados de usuários (para fins de demonstração)
+app = Flask(__name__)
+app.secret_key = 'sua_chave_secreta'  # Em andamento
+
+# Dados de usuários (para fins de demonstração) Em andamento
 usuarios = {
     'locador': {'username': 'locador', 'password': 'senha_locador'},
     'locatario': {'username': 'locatario', 'password': 'senha_locatario'}
@@ -88,8 +86,8 @@ def add_user_locator():
         email = request.form['email']
         phone_number = request.form['phoneNumber']
 
-        thisUser = user.Locator(name, email, phone_number, username, password)
-        userID = thisUser.getID()
+        thisUser = locator.Locator(name, email, phone_number, username, password)
+        userID = thisUser.locatorID
         userType = thisUser.getSelfType()
 
 
@@ -167,7 +165,7 @@ def add_courts():
         print(f"userID: {userID}, userType: {userType}")
         thisUser = user.User.getUserObject(userType, userID)
         print(thisUser)
-        courtagenda = dataRecover.filterAgendaData(weedDays, weekend)
+        courtagenda = dataRecover.DataRecover.filterAgendaData(weedDays, weekend)
         thisUser.addCourts(courtType, location, pricePerHour, courtagenda)
     
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
@@ -196,6 +194,5 @@ def user_created():
 
 
 if __name__ == '__main__':
-    clearTerminal()
     dataManagement()
-    app.run(debug=True, port='8080')
+    app.run(debug=False, port='8080')
