@@ -93,3 +93,47 @@ divs.forEach(function(div) {
         }
     });
 });
+
+if (window.location.pathname === '/dashboard') {
+    function showLocatorCourts(courtsData) {
+        // Get the court container
+        var courtContainer = document.getElementById('courtContainer');
+
+        // Clear existing content in the container
+        courtContainer.innerHTML = '';
+
+        // Iterate through the courts data and create divs
+        courtsData.forEach(function(court, index) {
+            // Create a new div element
+            var courtDiv = document.createElement('div');
+            courtDiv.classList.add('court-div');
+            courtDiv.setAttribute('data-locator', court.locatorId);
+            courtDiv.setAttribute('data-court', court.courtId);
+
+            // Set content for the div (you can customize this based on your data)
+            courtDiv.innerHTML = `
+                <h2>Court ${index + 1} for Locator ${court.locatorId}</h2>
+                <p>This is the content for Locator ${court.locatorId}'s Court ${court.courtId}.</p>
+            `;
+
+            // Append the new div to the container
+            courtContainer.appendChild(courtDiv);
+        });
+
+        // Show the dynamically created court divs
+        var courtDivs = document.getElementsByClassName('court-div');
+        for (var i = 0; i < courtDivs.length; i++) {
+            courtDivs[i].style.display = 'block';
+        }
+    }
+
+    // Example data for the courts of a specific locator (replace with actual data received from server)
+    var locatorCourtsData = [
+        { locatorId: 'locator1', courtId: 'court1' },
+        { locatorId: 'locator1', courtId: 'court2' },
+        // Add more court data as needed
+    ];
+
+    // Show divs for the received locator's courts data
+    showLocatorCourts(locatorCourtsData);
+}

@@ -42,15 +42,11 @@ def dataManagement():
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'  # Em andamento
 
-# Dados de usuários (para fins de demonstração) Em andamento
-usuarios = {
-    'locador': {'username': 'locador', 'password': 'senha_locador'},
-    'locatario': {'username': 'locatario', 'password': 'senha_locatario'}
-}
 
 @app.route('/')
 def redirect_to_login():
     return redirect('/login')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -60,10 +56,15 @@ def login():
         user_type = request.form['userType']
 
         # Verificar as credenciais do usuário
-        if username == usuarios[user_type]['username'] and password == usuarios[user_type]['password']:
+        if user.User.authenticateUser(username, password, user_type):
             session['username'] = username
             session['user_type'] = user_type
-            return redirect('/dashboard')
+            if user_type == 'Locator':
+                locatorID = user.User.getUserID(username, user_type)
+                return redirect(url_for('dashboard', locatorID=locatorID))
+            elif user_type == 'Renter':
+                renterID = user.User.getUserID(username, user_type)
+                return redirect(url_for('courts', renterID=renterID))
         else:
             error = 'Credenciais inválidas. Tente novamente.'
             return render_template('login.html', error=error)
@@ -88,7 +89,7 @@ def add_user_locator():
 
         thisUser = locator.Locator(name, email, phone_number, username, password)
         userID = thisUser.locatorID
-        userType = thisUser.getSelfType()
+        userType = "Locator"
 
 
         return redirect(url_for('add_courts', userID=userID, userType=userType))
@@ -173,12 +174,16 @@ def add_courts():
         return "Invalid request."        
 
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET'])
 def dashboard():
-    if 'username' in session:
-        return f'Bem-vindo, {session["username"]} ({session["user_type"]})! Este é o painel de controle.'
-    else:
-        return redirect('/')
+    locatorID = request.args.get('locatorID')
+    thisLocator = user.User.getUserObject("Locator", locatorID)
+    courts = []
+    for court in thisLocator.ownedCourts:
+        courts.append(court.getDetails())
+    print("______________________________________")
+    print(f"Locator {locatorID} courts: {courts}")
+    return jsonify(courts=courts, locatorID=locatorID)
 
 
 @app.route('/logout')
@@ -187,6 +192,7 @@ def logout():
     session.pop('user_type', None)
     
     return redirect('/')
+
 
 @app.route('/user_created')
 def user_created():
