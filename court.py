@@ -1,4 +1,4 @@
-import reservation, user, agenda
+import reservation, agenda, renter, user
 import pandas as pd
 
 class Court:
@@ -7,66 +7,55 @@ class Court:
     courtData = {}
 
 
-    def __init__(self, locatorID, courtType, location, pricePerHour, courtagenda):
-        self.__courtID = self.__class__.ser
+    def __init__(self, thisLocator, locatorID, courtType, location, pricePerHour, courtagenda):
+        self.courtID = self.__class__.ser
         self.__class__.ser+=1
-        self.__locatorID = locatorID
-        self.__courtType = courtType
-        self.__location = location
+        self.thisLocator = thisLocator
+        self.locatorID = locatorID
+        self.courtType = courtType
+        self.location = location
         self.pricePerHour = pricePerHour
-        thisAgenda = agenda.Agenda(self.courtID, courtagenda)
-        self.agendaID = thisAgenda.agendaID
+        thisAgenda = agenda.Agenda(self, courtagenda)
+        self.agenda = thisAgenda
 
         userexsits = self.locatorID in list(__class__.courtData.keys())
         
         if userexsits: 
             __class__.courtData[self.locatorID][self.courtID] = self.__dict__ 
-            user.User.getUserObject("Locator", self.locatorID).ownedCourts.append(self.courtID)
+            thisLocator.ownedCourts.append(self)
         else:
             __class__.courtData[self.locatorID] = {self.courtID : self.__dict__} ## VERIFICAR SE ESTÁ FUNCIONANDO ( )
-            user.User.getUserObject("Locator", self.locatorID).ownedCourts.append(self.courtID)
+            thisLocator.ownedCourts.append(self)
 
         print("______________________________________")
         print(f"Court {self.courtID} created")
         print(f"Court {self.courtID} data: {self.__dict__}")
         print(f"Court Data: {__class__.courtData}")
         
-        __class__.updateCourtData(self.locatorID, self.courtID, userexsits)
+        self.updateCourtData(userexsits)
+        user.User.updateUserData("Locator")
     
-    @property
-    def courtID(self):
+    def getDetails(self):
 
-        return self.__courtID
-    
-    @property
-    def locatorID(self):
+        return self.__dict__
 
-        return self.__locatorID
-    
-    @property
-    def courtType(self):
+    def getCourtID(self):
 
-        return self.__courtType
-    
-    @property
-    def location(self):
+        return self.courtID
 
-        return self.__location
-
-    @classmethod
-    def updateCourtData(__class__, locatorID, courtID, userexsits):
+    def updateCourtData(self, userexsits):
         ## create csv for each locator
-        newCourtData = pd.DataFrame(__class__.courtData[locatorID][courtID], index=[courtID] )
+        newCourtData = pd.DataFrame(self.__class__.courtData[self.locatorID][self.courtID], index=[self.courtID])
         if userexsits:
-            oldCourtData = pd.read_csv(f"courtData/locator{locatorID}CourtData.csv")
+            oldCourtData = pd.read_csv(f"courtData/locator{self.locatorID}CourtData.csv")
             newCourtData = pd.concat([oldCourtData, newCourtData], ignore_index=True)
-        newCourtData.to_csv(f"courtData/locator{locatorID}CourtData.csv", index=False)
+        newCourtData.to_csv(f"courtData/locator{self.locatorID}CourtData.csv", index=False)
 
     def bookCourt(self, userID, date, startTime, endTime):
         if self.checkAvailability(date, startTime, endTime) == True:
-            thisreservation = reservation.Reservation(self.courtID, userID, user.Renter.getRenterName(userID), date, startTime, endTime)
-            agenda.Agenda.updateAgenda(self.courtID, date, startTime, endTime, [user.Renter.getRenterName(userID), False])
-            user.Renter.registerReservation(thisreservation.getResID(self.courtID), userID)
+            thisreservation = reservation.Reservation(self.courtID, userID, renter.Renter.getRenterName(userID), date, startTime, endTime)
+            self.agenda.getAgenda.updateAgenda(self.courtID, date, startTime, endTime, [renter.Renter.getRenterName(userID), False])
+            renter.Renter.registerReservation(thisreservation.getResID(self.courtID), userID)
         else:
             
             return False
@@ -75,14 +64,10 @@ class Court:
         reservationToCancel = reservation.Reservation.getResData[resID] 
         if self.checkAvailability(agenda.Agenda.agendaData[self.courtID][reservationToCancel[1][0]][reservationToCancel[1][1]:reservationToCancel[1][2]]) == False:
             agenda.Agenda.updateAgenda(resID, reservationToCancel[1][0], reservationToCancel[1][1], reservationToCancel[1][2], [None, True])
-            user.Renter.unregisterReservation(reservationToCancel)
+            renter.Renter.unregisterReservation(reservationToCancel)
         else:
 
             return False
-    
-    def getCourtID(self):
-
-        return self.courtID
     
 
     def checkAvailability(self, date, startTime, endTime):
@@ -92,9 +77,4 @@ class Court:
                 return False
             
         return True
-
-    @classmethod
-    def getDetails(__class__, courtID):
-
-        return __class__.courtReservationData[courtID]
     

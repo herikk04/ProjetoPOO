@@ -2,10 +2,13 @@ import pandas as pd
 
 class Agenda:
     agendaData = []
+    ser = 0
 
     ## PARECE TER UM ERRO NA CRIAÇÃO DE AGENDAS, VERIFICAR PARA DIAS DA SEMANA --  scripts.js, flaskrun.py
-    def __init__(self, aCourt, courtAgenda):
-        self.__agendaID = aCourt
+    def __init__(self, court, courtAgenda):
+        self.agendaID = self.__class__.ser
+        self.__class__.ser+=1
+        self.court = court
         self.courtAgenda = courtAgenda
         print("______________________________________")
         print(f"Agenda {self.agendaID} created")
@@ -13,11 +16,6 @@ class Agenda:
         ## create csv for each agenda
         newAgendaData = pd.DataFrame(self.__dict__)
         newAgendaData.to_csv(f"agendaData/agendaData{self.agendaID}.csv", index=False)
-    
-    @property
-    def agendaID(self):
-
-        return self.__agendaID
 
     @classmethod
     def getAgenda(__class__, agendaID):
@@ -26,11 +24,11 @@ class Agenda:
     
 
     @classmethod
-    def updateAgenda(__class__, agendaID, date, startTime, endTime, value):
+    def updateAgenda(self, date, startTime, endTime, value):
         for i in range(startTime,endTime+1):
-            __class__.agendaData[agendaID][date-1][i] = value
-        newAgendaData = pd.DataFrame(__class__.agendaData[agendaID])
-        newAgendaData.to_csv(f"agendaData/agendaData{agendaID}.csv", index=True)
+            self.agendaData[date-1][i] = value
+        newAgendaData = pd.DataFrame(self.agendaData)
+        newAgendaData.to_csv(f"agendaData/agenda{self.agendaID}Data.csv", index=True)
         
 
 
