@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for, jsonify
+
 import user, dataRecover, locator, renter
+
 from pandas import read_csv, DataFrame
 
 
@@ -56,19 +58,19 @@ def login():
         user_type = request.form['userType']
 
         # Verificar as credenciais do usuário
-        if user.User.authenticateUser(username, password, user_type):
+        authentication = user.User.authenticateUser(username, password, user_type)
+        if authentication[0]:
             session['username'] = username
             session['user_type'] = user_type
             if user_type == 'Locator':
-                locatorID = user.User.getUserID(username, user_type)
+                locatorID = authentication[1]
                 return redirect(url_for('dashboard', locatorID=locatorID))
             elif user_type == 'Renter':
-                renterID = user.User.getUserID(username, user_type)
+                renterID = authentication[1]
                 return redirect(url_for('courts', renterID=renterID))
         else:
             error = 'Credenciais inválidas. Tente novamente.'
             return render_template('login.html', error=error)
-
     return render_template('login.html')
 
 
@@ -95,6 +97,24 @@ def add_user_locator():
         return redirect(url_for('add_courts', userID=userID, userType=userType))
 
     return render_template('add_user_locator.html')
+
+
+@app.route('/add_user_renter', methods=['GET', 'POST'])
+def add_user_renter():
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        phone_number = request.form['phoneNumber']
+
+        thisUser = renter.Renter(name, email, phone_number, username, password)
+        userID = thisUser.renterID
+        userType = "Renter"
+
+        return redirect(url_for('courts', userID=userID, userType=userType))
+
+    return render_template('add_user_renter.html')
 
 
 @app.route('/add_courts', methods=['GET', 'POST'])
@@ -176,14 +196,75 @@ def add_courts():
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
+    locatorID = int(request.args.get('locatorID'))
+    username = user.User.getUserObject("Locator", locatorID).username
+    return render_template('dashboard.html', locatorID=locatorID, username=username)
+
+
+@app.route('/courts', methods=['GET'])
+def courts():
+    renterID = int(request.args.get('renterID'))
+    username = user.User.getUserObject("Renter", renterID).username
+    return render_template('courts.html', username=username)
+
+
+@app.route('/user_profile', methods=['GET'])
+def user_profile():
+    userId = int(request.args.get('userID'))
+    userType = request.args.get('userType')
+    thisUser = user.User.getUserObject(userType, userId)
+    name = thisUser.name
+    email = thisUser.email
+    username = thisUser.username
+    phoneNumber = thisUser.phoneNumber
+    return render_template('user_profile.html', name=name, email=email, username=username, phoneNumber=phoneNumber)
+
+@app.route('/request_courts', methods=['GET'])
+def request_courts():
     locatorID = request.args.get('locatorID')
-    thisLocator = user.User.getUserObject("Locator", locatorID)
+    if locatorID != None:
+        thisLocator = (user.User.getUserObject("Locator", int(locatorID)))
+        courts = []
+        for court in thisLocator.ownedCourts:
+            courts.append(court.getDetails())
+        return jsonify(courts=courts, locatorID=locatorID)
+    else:
+        courts = []
+        for locator in user.User.userData["Locator"]:
+            locatorID = locator["locatorID"]
+            thisLocator = (user.User.getUserObject("Locator", locatorID))
+            for court in thisLocator.ownedCourts:
+                details = court.getDetails()
+                details["locatorName"] = thisLocator.username
+                courts.append(details)
+        return jsonify(courts=courts)
+
+## EM ANDAMENTO
+@app.route('/request_agenda', methods=['GET'])
+def request_agenda():
+    courtID = int(request.args.get('courtID'))
+    thisCourt = (user.User.getUserObject("Court", courtID))
+    return jsonify(agenda=thisCourt.agenda)
+
+## EM ANDAMENTO
+@app.route('/request_locator_data', methods=['GET'])
+def request_locator_data():
+    locatorID = int(request.args.get('locatorID'))
+    thisLocator = (user.User.getUserObject("Locator", locatorID))
     courts = []
     for court in thisLocator.ownedCourts:
         courts.append(court.getDetails())
-    print("______________________________________")
-    print(f"Locator {locatorID} courts: {courts}")
     return jsonify(courts=courts, locatorID=locatorID)
+
+## EM ANDAMENTO
+@app.route('/request_renter_data', methods=['GET'])
+def request_renter_data():
+    renterID = int(request.args.get('renterID'))
+    thisRenter = (user.User.getUserObject("Renter", renterID))
+    reservations = []
+    for reservation in thisRenter.reservations:
+        reservations.append(reservation.getDetails())
+    return jsonify(reservations=reservations, renterID=renterID)
 
 
 @app.route('/logout')
@@ -201,4 +282,4 @@ def user_created():
 
 if __name__ == '__main__':
     dataManagement()
-    app.run(debug=False, port='8080')
+    app.run(debug=True, port=5000)

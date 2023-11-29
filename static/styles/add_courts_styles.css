@@ -80,6 +80,14 @@ button[type="submit"]:hover {
     cursor: pointer;
 }
 
+.hour-selector > div > input:hover {
+    cursor: pointer;
+}
+
+.hour-selector > div > label:hover {
+    cursor: pointer;
+}
+
 .clickable-div label {
     user-select: none;
 }

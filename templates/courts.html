@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/dashboard_styles.css')}}">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/courts_styles.css')}}">
 </head>
 <body>
     <div class="page-top-buttons">
@@ -11,7 +11,8 @@
         <button id="logoutButton">Sair</button>
         <button id="profileButton">Perfil</button>
     </div>
-    <h1>Quadras de {{username}}</h1>
+    <h1>Bem vindo(a) {{username}}!</h1>
+    <h2>Aqui estão nossas quadras disponíveis:</h2>
     <div id="courtContainer"></div>
     <script src="{{ url_for('static',filename='script/script.js') }}"></script>
 </body>

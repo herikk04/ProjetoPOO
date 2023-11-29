@@ -80,7 +80,6 @@ if (window.location.pathname === '/add_user_locator') {
     })
 }
 
-
 var divs = document.querySelectorAll("div.clickable-div");
 divs.forEach(function(div) {
     div.addEventListener("click", function(event) {
@@ -94,46 +93,120 @@ divs.forEach(function(div) {
     });
 });
 
+// EXECUTA NA PÁGINA DASHBOARD
 if (window.location.pathname === '/dashboard') {
     function showLocatorCourts(courtsData) {
-        // Get the court container
         var courtContainer = document.getElementById('courtContainer');
-
-        // Clear existing content in the container
         courtContainer.innerHTML = '';
 
-        // Iterate through the courts data and create divs
         courtsData.forEach(function(court, index) {
-            // Create a new div element
             var courtDiv = document.createElement('div');
             courtDiv.classList.add('court-div');
             courtDiv.setAttribute('data-locator', court.locatorId);
             courtDiv.setAttribute('data-court', court.courtId);
 
-            // Set content for the div (you can customize this based on your data)
             courtDiv.innerHTML = `
-                <h2>Court ${index + 1} for Locator ${court.locatorId}</h2>
-                <p>This is the content for Locator ${court.locatorId}'s Court ${court.courtId}.</p>
+            <div class="court">
+                <h2>Quadra ${index + 1}</h2>
+                <p>Tipo de quadra: ${court.courtType}</p>
+                <p>Localização: ${court.location}</p>
+                <p>Preço por hora: R$${court.pricePerHour},00</p>
+            </div>
             `;
-
-            // Append the new div to the container
             courtContainer.appendChild(courtDiv);
         });
 
-        // Show the dynamically created court divs
         var courtDivs = document.getElementsByClassName('court-div');
         for (var i = 0; i < courtDivs.length; i++) {
             courtDivs[i].style.display = 'block';
         }
     }
 
-    // Example data for the courts of a specific locator (replace with actual data received from server)
-    var locatorCourtsData = [
-        { locatorId: 'locator1', courtId: 'court1' },
-        { locatorId: 'locator1', courtId: 'court2' },
-        // Add more court data as needed
-    ];
+    const urlParams = new URLSearchParams(window.location.search);
+    const locatorID = urlParams.get('locatorID');
+    fetch(window.location.origin + '/request_courts?locatorID=' + locatorID)
+    .then(response => response.json())
+    .then(data =>{
+        console.log(data);
+        showLocatorCourts(data['courts'])
+    }
+    )
+    .catch(error => console.error(error));
 
-    // Show divs for the received locator's courts data
-    showLocatorCourts(locatorCourtsData);
+    var userID = new URLSearchParams(window.location.search).get('locatorID');
+    var profileButton = document.getElementById('profileButton');
+    profileButton.addEventListener('click', function(event) {
+        var newURL = window.location.origin + '/user_profile?userID=' + userID + '&userType=Locator';
+        window.location.replace(newURL);
+    });
 }
+
+
+//EXECUTA NA PÁGINA COURTS
+if (window.location.pathname === '/courts') {
+    function showAllCourts(courtsData) {
+        var courtContainer = document.getElementById('courtContainer');
+
+        courtContainer.innerHTML = '';
+
+        courtsData.forEach(function(court, index) {
+            var courtDiv = document.createElement('div');
+            courtDiv.classList.add('court-div');
+            courtDiv.setAttribute('data-locator', court.locatorId);
+            courtDiv.setAttribute('data-court', court.courtId);
+
+            courtDiv.innerHTML = `
+            <div class="court">
+                <h2>Quadra ${index + 1}</h2>
+                <p>Locatário: ${court.locatorName}</p>
+                <p>Tipo de quadra: ${court.courtType}</p>
+                <p>Localização: ${court.location}</p>
+                <p>Preço por hora: R$${court.pricePerHour},00</p>
+                <button type="button" class="locate">Alugar</button>
+            </div>
+            `;
+
+            courtContainer.appendChild(courtDiv);
+        });
+
+        var courtDivs = document.getElementsByClassName('court-div');
+        for (var i = 0; i < courtDivs.length; i++) {
+            courtDivs[i].style.display = 'block';
+        }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    fetch(window.location.origin + '/request_courts')
+    .then(response => response.json())
+    .then(data =>{
+        console.log(data);
+        showAllCourts(data['courts'])
+    }
+    )
+    .catch(error => console.error(error));
+
+    //Em andamento
+    var locateButtons = document.getElementsByClassName('locate');
+    for (var i = 0; i < locateButtons.length; i++) {
+        locateButtons[i].addEventListener('click', function(event) {
+            var locatorID = event.target.parentElement.parentElement.getAttribute('data-locator');
+            var courtID = event.target.parentElement.parentElement.getAttribute('data-court');
+            var newURL = window.location.origin + '/locate?locatorID=' + locatorID + '&courtID=' + courtID;
+            window.location.replace(newURL);
+        });
+    }
+
+    var userID = new URLSearchParams(window.location.search).get('renterID');
+    var profileButton = document.getElementById('profileButton');
+    profileButton.addEventListener('click', function(event) {
+        var newURL = window.location.origin + '/user_profile?userID=' + userID + '&userType=Renter';
+        window.location.replace(newURL);
+    });
+}
+
+var logOutButton = document.getElementById('logoutButton');
+logOutButton.addEventListener('click', function(event) {
+    localStorage.clear();
+    var newURL = window.location.origin + '/logout';
+    window.location.replace(newURL);
+});

@@ -36,8 +36,12 @@ class Court:
         user.User.updateUserData("Locator")
     
     def getDetails(self):
+        details = {}
+        details["courtType"] = self.courtType
+        details["location"] = self.location
+        details["pricePerHour"] = self.pricePerHour
 
-        return self.__dict__
+        return details
 
     def getCourtID(self):
 

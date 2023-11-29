@@ -19,8 +19,13 @@ class User:
     def authenticateUser(__class__, username, password, userType):
         for user in __class__.userData[userType]:
             if user["username"] == username and user["password"] == password:
-                return True
-        return False
+                print("______________________________________")
+                print(f"User {username} succesfully authenticated!")
+                if userType == "Locator":
+                    return True, user["locatorID"]
+                elif userType == "Renter":
+                    return True, user["renterID"]
+        return False, None
 
 
     @classmethod

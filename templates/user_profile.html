@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de Usuário</title>
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/user_profile_styles.css')}}">
+</head>
+<body>
+    <div class="page-top-buttons">
+        <input type='button' value="Voltar" onclick="history.go(-1)()">
+        <button id="editDataButton">Editar Dados</button> <!--EM ANDAMENTO-->
+        <button id="logoutButton">Sair</button>
+    </div>
+    <h1>Página pessoal de {{username}}</h1>
+    <div id="userData">
+        <h3>Seus dados:</h3>
+        <p>Nome: {{name}}</p>
+        <p>Nome de usuário: {{username}}</p>
+        <p>Endereço de email: {{email}}</p>
+        <p>Telefone: {{phoneNumber}}</p>
+    </div>
+    <script src="{{ url_for('static',filename='script/script.js') }}"></script>
+</body>
+</html>

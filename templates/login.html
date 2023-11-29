@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicativo de Reserva de Quadras</title>
+    <title>Bem vindo!</title>
     <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/login_styles.css')}}">
 </head>
 
 <body>
+    <h2>Olá, por favor faça login ou cadastre-se para continuar!</h2>
     <div class="login-container">
-        <h2>Aplicativo de Reserva de Quadras</h2>
         <div class="login-form">
-            <form method="POST" action="/">
-                <label for="userType">Selecione o Tipo de Usuário:</label>
+            <form method="POST" action="/login">
+                <label for="userType">Você é dono ou consumidor de quadras?</label>
                 <select id="userType" name="userType">
-                    <option value="Locator">Locatário</option>
-                    <option value="Renter">Locador</option>
+                    <option value="Locator">Dono</option>
+                    <option value="Renter">Consumidor</option>
                 </select>
                 <br>
                 <input type="text" id="username" name="username" placeholder="Nome de Usuário" required><br>
