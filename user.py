@@ -14,9 +14,18 @@ class User:
         print("______________________________________")
         print(f"User created")
 
-    def getSelfType(self):
-            
-        return self.userType
+
+    @classmethod
+    def authenticateUser(__class__, username, password, userType):
+        for user in __class__.userData[userType]:
+            if user["username"] == username and user["password"] == password:
+                print("______________________________________")
+                print(f"User {username} succesfully authenticated!")
+                if userType == "Locator":
+                    return True, user["locatorID"]
+                elif userType == "Renter":
+                    return True, user["renterID"]
+        return False, None
 
 
     @classmethod

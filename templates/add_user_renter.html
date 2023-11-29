@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-BR"> 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Usuário</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/add_user_locator_styles.css')}}">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/add_user_renter_styles.css')}}">
 </head>
-
 <body>
     <h2>Adicionar Novo Usuário</h2>
-    <h3>Bem vindo! Estamos ansiosos para adicionar suas quadras ao nosso acervo, você está pronto para escalonar a visibilidade de seu negócio?</h3>
-    <form method="POST" action="/add_user_locator" id="form-add-user-locator">
+    <h3>Bem vindo! Aqui você poderá escolher entre quadras de diversos tipos para atender às suas necessidades!</h3>
+    <form method="POST" action="/add_user_renter" id="form-add-user-renter">
         <label for="name">Nome:</label>
         <input type="text" id="name" name="name" required autocomplete="name"><br>
         <label for="username">Nome de Usuário:</label>
@@ -21,13 +18,9 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required autocomplete="email"><br>
         <label for="phoneNumber">Número de Telefone:</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" required autocomplete="tel-national"><br>
-        <label for="ownedCourtsNum">Quantidade de quadras possuída:</label>
-        <input type="number" id="ownedCourtsNum" name="ownedCourtsNum" required><br>
-        <button type="submit">Cadastrar Quadras</button>
-        
+        <input type="tel" id="phoneNumber" name="phoneNumber" required autocomplete="tel"><br>
+        <button type="submit">Cadastrar</button>
     </form>
     <script src="{{ url_for('static',filename='script/script.js') }}"></script>
 </body>
-
 </html>

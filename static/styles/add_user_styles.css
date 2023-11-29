@@ -1,7 +1,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: rgb(0, 103, 212);
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,37 +12,30 @@ body {
 }
 
 h2 {
-    margin-bottom: 20px;
+    color: white;
+    margin-bottom: 0px;
 }
 
-form {
-    background-color: #ffffff;
-    padding: 20px;
+.user-type-selector {
     border-radius: 5px;
+    background-color: #2ecc71;
+    inline-size: 30%;
+    block-size: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    text-align: auto;
-    width: 300px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-input, select {
-    width: calc(100% - 22px); /* Adjust the width based on your padding and border */
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    align-items: center;
+    gap: 20px;
 }
 
 button {
-    background-color: #4caf50;
+    background-color: #1e7e46;
     color: white;
     border: none;
     border-radius: 5px;
+    margin: 10px 0 10px 0;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 12px 20px;
     font-size: 16px;
     cursor: pointer;

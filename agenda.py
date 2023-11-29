@@ -4,7 +4,6 @@ class Agenda:
     agendaData = []
     ser = 0
 
-    ## PARECE TER UM ERRO NA CRIAÇÃO DE AGENDAS, VERIFICAR PARA DIAS DA SEMANA --  scripts.js, flaskrun.py
     def __init__(self, court, courtAgenda):
         self.agendaID = self.__class__.ser
         self.__class__.ser+=1
@@ -18,8 +17,7 @@ class Agenda:
         newAgendaData.to_csv(f"agendaData/agendaData{self.agendaID}.csv", index=False)
 
     @classmethod
-    def getAgenda(__class__, agendaID):
-
+    def getAgenda(__class__, agendaID): 
         return __class__.agendaData[agendaID]
     
 
