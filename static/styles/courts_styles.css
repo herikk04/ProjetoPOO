@@ -68,3 +68,14 @@ body {
     background-color: #cf8700;
 }
 
+/* This is a button that is used to rent a court */
+.locate {
+    background-color: #FFA500;
+    color: rgb(59, 59, 59);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}

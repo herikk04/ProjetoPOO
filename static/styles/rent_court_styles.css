@@ -1,0 +1,95 @@
+/* Reset some default styles */
+body,
+h1,
+h2,
+table {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+}
+
+h1,
+h2 {
+    color: #000;
+}
+
+table {
+    width: auto;
+    margin: 20px auto;
+    /* Center the table */
+    border-collapse: collapse;
+    overflow: hidden;
+    /* Hide overflowing content */
+    border-radius: 8px;
+    /* Add rounded corners */
+}
+
+th,
+td {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #000;
+    color: #fff;
+}
+
+.table-container {
+    margin-top: 20px;
+}
+
+/* Additional styling for links if needed */
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.action-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    /* Add rounded corners to the buttons */
+}
+
+/* Your existing CSS styles */
+
+/* Style for the submit button */
+.submit-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    /* Add rounded corners to the button */
+}
+
+.submit-button:hover {
+    background-color: #333;
+    /* Change color on hover */
+}

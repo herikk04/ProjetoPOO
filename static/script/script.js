@@ -4,14 +4,14 @@ if (window.location.pathname === '/add_courts') {
     const checkboxContainer = document.getElementById('hour-selector');
     const checkboxes = checkboxContainer.querySelectorAll('div input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        this.value = this.checked ? '1' : '0';
+        checkbox.addEventListener('change', function () {
+            this.value = this.checked ? '1' : '0';
+        });
+        checkbox.value = '0';
     });
-        checkbox.value = '0'; 
-    });
-    
 
-    if(ownedCourtsNum==0) {
+
+    if (ownedCourtsNum == 0) {
         var newURL = window.location.origin + '/user_created';
         window.location.replace(newURL); // redireciona para página de usuário criado com sucesso
     }
@@ -20,7 +20,7 @@ if (window.location.pathname === '/add_courts') {
     form.addEventListener('submit', function onSubmitForm(e) {
         let n = ownedCourtsNum;
         e.preventDefault();
-        localStorage.setItem('ownedCourtsNum', n-1);
+        localStorage.setItem('ownedCourtsNum', n - 1);
         if (n > 0) {
             let n = localStorage.getItem('ownedCourtsNum');
             console.log(n)
@@ -43,32 +43,32 @@ if (window.location.pathname === '/add_courts') {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                  },
+                },
                 body: jsonData
             })
-            .then(function(response) {
-                responseClone = response.clone();
-                return response.json();
-            })
-            .then(jsonData => {
-                console.log('Success:', jsonData);
-                window.location.reload();
-            },
-            function (rejectionReason) { 
-                console.log('Error parsing JSON from response:', rejectionReason, responseClone);
-                responseClone.text()
-                .then(function (bodyText) {
-                    console.log('Received the following instead of valid JSON:', bodyText);
-                });
-            })
-            .catch(error => console.error('Error:', error));
+                .then(function (response) {
+                    responseClone = response.clone();
+                    return response.json();
+                })
+                .then(jsonData => {
+                    console.log('Success:', jsonData);
+                    window.location.reload();
+                },
+                    function (rejectionReason) {
+                        console.log('Error parsing JSON from response:', rejectionReason, responseClone);
+                        responseClone.text()
+                            .then(function (bodyText) {
+                                console.log('Received the following instead of valid JSON:', bodyText);
+                            });
+                    })
+                .catch(error => console.error('Error:', error));
         }
     });
 }
 
 // EXECUTA NA PÁGINA DE ADICIONAR LOCATÁRIO
 if (window.location.pathname === '/add_user_locator') {
-    window.onload = function() {
+    window.onload = function () {
         localStorage.clear();
     }
     const formElement = document.querySelector("#form-add-user-locator");
@@ -81,8 +81,8 @@ if (window.location.pathname === '/add_user_locator') {
 }
 
 var divs = document.querySelectorAll("div.clickable-div");
-divs.forEach(function(div) {
-    div.addEventListener("click", function(event) {
+divs.forEach(function (div) {
+    div.addEventListener("click", function (event) {
         if (event.target.type !== 'checkbox' && event.target.tagName !== 'LABEL') {
             var checkbox = div.querySelector('input[type="checkbox"]');
             if (checkbox) {
@@ -99,11 +99,11 @@ if (window.location.pathname === '/dashboard') {
         var courtContainer = document.getElementById('courtContainer');
         courtContainer.innerHTML = '';
 
-        courtsData.forEach(function(court, index) {
+        courtsData.forEach(function (court, index) {
             var courtDiv = document.createElement('div');
             courtDiv.classList.add('court-div');
-            courtDiv.setAttribute('data-locator', court.locatorId);
-            courtDiv.setAttribute('data-court', court.courtId);
+            courtDiv.setAttribute('data-locator', court.locatorID);
+            courtDiv.setAttribute('data-court', court.courtID);
 
             courtDiv.innerHTML = `
             <div class="court">
@@ -125,17 +125,17 @@ if (window.location.pathname === '/dashboard') {
     const urlParams = new URLSearchParams(window.location.search);
     const locatorID = urlParams.get('locatorID');
     fetch(window.location.origin + '/request_courts?locatorID=' + locatorID)
-    .then(response => response.json())
-    .then(data =>{
-        console.log(data);
-        showLocatorCourts(data['courts'])
-    }
-    )
-    .catch(error => console.error(error));
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showLocatorCourts(data['courts'])
+        }
+        )
+        .catch(error => console.error(error));
 
     var userID = new URLSearchParams(window.location.search).get('locatorID');
     var profileButton = document.getElementById('profileButton');
-    profileButton.addEventListener('click', function(event) {
+    profileButton.addEventListener('click', function (event) {
         var newURL = window.location.origin + '/user_profile?userID=' + userID + '&userType=Locator';
         window.location.replace(newURL);
     });
@@ -149,11 +149,11 @@ if (window.location.pathname === '/courts') {
 
         courtContainer.innerHTML = '';
 
-        courtsData.forEach(function(court, index) {
+        courtsData.forEach(function (court, index) {
             var courtDiv = document.createElement('div');
             courtDiv.classList.add('court-div');
-            courtDiv.setAttribute('data-locator', court.locatorId);
-            courtDiv.setAttribute('data-court', court.courtId);
+            courtDiv.setAttribute('data-locator', court.locatorID);
+            courtDiv.setAttribute('data-court', court.courtID);
 
             courtDiv.innerHTML = `
             <div class="court">
@@ -162,7 +162,9 @@ if (window.location.pathname === '/courts') {
                 <p>Tipo de quadra: ${court.courtType}</p>
                 <p>Localização: ${court.location}</p>
                 <p>Preço por hora: R$${court.pricePerHour},00</p>
-                <button type="button" class="locate">Alugar</button>
+                <a href="/rent_court?courtID=${court.courtID}&locatorID=${court.locatorID}">
+                    <button type="button" class="locate">Alugar</button>
+                </a>
             </div>
             `;
 
@@ -177,18 +179,18 @@ if (window.location.pathname === '/courts') {
 
     const urlParams = new URLSearchParams(window.location.search);
     fetch(window.location.origin + '/request_courts')
-    .then(response => response.json())
-    .then(data =>{
-        console.log(data);
-        showAllCourts(data['courts'])
-    }
-    )
-    .catch(error => console.error(error));
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showAllCourts(data['courts'])
+        }
+        )
+        .catch(error => console.error(error));
 
     //Em andamento
     var locateButtons = document.getElementsByClassName('locate');
     for (var i = 0; i < locateButtons.length; i++) {
-        locateButtons[i].addEventListener('click', function(event) {
+        locateButtons[i].addEventListener('click', function (event) {
             var locatorID = event.target.parentElement.parentElement.getAttribute('data-locator');
             var courtID = event.target.parentElement.parentElement.getAttribute('data-court');
             var newURL = window.location.origin + '/locate?locatorID=' + locatorID + '&courtID=' + courtID;
@@ -198,14 +200,14 @@ if (window.location.pathname === '/courts') {
 
     var userID = new URLSearchParams(window.location.search).get('renterID');
     var profileButton = document.getElementById('profileButton');
-    profileButton.addEventListener('click', function(event) {
+    profileButton.addEventListener('click', function (event) {
         var newURL = window.location.origin + '/user_profile?userID=' + userID + '&userType=Renter';
         window.location.replace(newURL);
     });
 }
 
 var logOutButton = document.getElementById('logoutButton');
-logOutButton.addEventListener('click', function(event) {
+logOutButton.addEventListener('click', function (event) {
     localStorage.clear();
     var newURL = window.location.origin + '/logout';
     window.location.replace(newURL);

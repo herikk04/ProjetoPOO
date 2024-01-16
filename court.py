@@ -27,10 +27,10 @@ class Court:
             __class__.courtData[self.locatorID] = {self.courtID : self.__dict__} ## VERIFICAR SE ESTÁ FUNCIONANDO ( )
             thisLocator.ownedCourts.append(self)
 
-        print("______________________________________")
-        print(f"Court {self.courtID} created")
-        print(f"Court {self.courtID} data: {self.__dict__}")
-        print(f"Court Data: {__class__.courtData}")
+        ## print("______________________________________")
+        ## print(f"Court {self.courtID} created")
+        ## print(f"Court {self.courtID} data: {self.__dict__}")
+        ## print(f"Court Data: {__class__.courtData}")
         
         self.updateCourtData(userexsits)
         user.User.updateUserData("Locator")
@@ -40,6 +40,8 @@ class Court:
         details["courtType"] = self.courtType
         details["location"] = self.location
         details["pricePerHour"] = self.pricePerHour
+        details["courtID"] = self.courtID
+        details["locatorID"] = self.locatorID
 
         return details
 

@@ -1,4 +1,5 @@
 import pandas as pd
+import ast
 
 class Agenda:
     agendaData = []
@@ -9,8 +10,8 @@ class Agenda:
         self.__class__.ser+=1
         self.court = court
         self.courtAgenda = courtAgenda
-        print("______________________________________")
-        print(f"Agenda {self.agendaID} created")
+        ## print("______________________________________")
+        ## print(f"Agenda {self.agendaID} created")
         __class__.agendaData.append(self.courtAgenda)
         ## create csv for each agenda
         newAgendaData = pd.DataFrame(self.__dict__)
@@ -27,7 +28,26 @@ class Agenda:
             self.agendaData[date-1][i] = value
         newAgendaData = pd.DataFrame(self.agendaData)
         newAgendaData.to_csv(f"agendaData/agenda{self.agendaID}Data.csv", index=True)
-        
 
+    @classmethod
+    def filterAgenda(__class__, agenda):
+        today = pd.Timestamp('now').day
+        agenda = list(agenda)
+        agenda = agenda[today]
+        agenda = ast.literal_eval(agenda)
+        ## create series for hours from 0 to 23
+        hours = pd.Series(range(0,24))
+        hours = hours.apply(lambda x: f"{x}:00")
+        agenda = pd.DataFrame(agenda, index=hours)
+        ## set column name
+        agenda.columns = ["None", "Disponibilidade"]
+        agenda = agenda.drop("None", axis=1)
+        for i, timeSlot in enumerate(agenda["Disponibilidade"]):
+            if timeSlot == True:
+                agenda["Disponibilidade"][i] = "Disponível"
+            else:
+                agenda["Disponibilidade"][i] = "Indisponível"
+        print(agenda)
+        return agenda
 
        

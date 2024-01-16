@@ -11,16 +11,16 @@ class User:
         self.phoneNumber = phoneNumber
         self.username = username
         self.password = password
-        print("______________________________________")
-        print(f"User created")
+        ## print("______________________________________")
+        ## print(f"User created")
 
 
     @classmethod
     def authenticateUser(__class__, username, password, userType):
         for user in __class__.userData[userType]:
             if user["username"] == username and user["password"] == password:
-                print("______________________________________")
-                print(f"User {username} succesfully authenticated!")
+                ## print("______________________________________")
+                ## print(f"User {username} succesfully authenticated!")
                 if userType == "Locator":
                     return True, user["locatorID"]
                 elif userType == "Renter":

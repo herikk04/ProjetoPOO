@@ -12,9 +12,9 @@ class Locator(User):
         self.ownedCourts = []
         self.object = self
         super().userData["Locator"].append(self.__dict__)
-        print("______________________________________")
-        print(f"Locator {self.locatorID} created")
-        print(f"Locator {self.locatorID} data: {self.__dict__}")
+        ## print("______________________________________")
+        ## print(f"Locator {self.locatorID} created")
+        ## print(f"Locator {self.locatorID} data: {self.__dict__}")
         super().updateUserData("Locator")
     
     def getID(self):
@@ -24,6 +24,9 @@ class Locator(User):
 
     def addCourts(self, courtType, location, pricePerHour, courtagenda):
         thisCourt = court.Court(self.object, self.locatorID, courtType, location, pricePerHour, courtagenda)
-        print("______________________________________")
-        print(f"Locator {self.locatorID} added court {thisCourt.getCourtID()}")
+        ## print("______________________________________")
+        ## print(f"Locator {self.locatorID} added court {thisCourt.getCourtID()}")
         super().updateUserData("Locator")
+    
+    def getCourts(self, courtID):
+        return self.ownedCourts[courtID]

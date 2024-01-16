@@ -1,8 +1,8 @@
 courtID,thisLocator,locatorID,courtType,location,pricePerHour,agenda
-5,<locator.Locator object at 0x7f61cc2edbd0>,3,Basquete,Av. Alamar Arantes,320,<agenda.Agenda object at 0x7f61caa61d90>
-6,<locator.Locator object at 0x7f61cc2edbd0>,3,Pista de Corrida,Rua Palmeiras,200,<agenda.Agenda object at 0x7f61cc78a050>
-7,<locator.Locator object at 0x7f61cc2edbd0>,3,Pista de Skate,Rua T6,180,<agenda.Agenda object at 0x7f61ca896f10>
-8,<locator.Locator object at 0x7f61cc2edbd0>,3,Handebol,Av. Alamar Arantes,100,<agenda.Agenda object at 0x7f61cc744a90>
-9,<locator.Locator object at 0x7f61cc2edbd0>,3,Futebol,Rua T6,300,<agenda.Agenda object at 0x7f61ca895cd0>
-10,<locator.Locator object at 0x7f61cc2edbd0>,3,Tenis,Av. Alamar Arantes,300,<agenda.Agenda object at 0x7f61cc36a410>
-11,<locator.Locator object at 0x7f61cc2edbd0>,3,Basquete,Av. Alamar Arantes,320,<agenda.Agenda object at 0x7f61ca888e50>
+5,<locator.Locator object at 0x000001B6E19DF650>,3,Basquete,Av. Alamar Arantes,320,<agenda.Agenda object at 0x000001B6E19EACD0>
+6,<locator.Locator object at 0x000001B6E19DF650>,3,Pista de Corrida,Rua Palmeiras,200,<agenda.Agenda object at 0x000001B6E19EB210>
+7,<locator.Locator object at 0x000001B6E19DF650>,3,Pista de Skate,Rua T6,180,<agenda.Agenda object at 0x000001B6E19D6F90>
+8,<locator.Locator object at 0x000001B6E19DF650>,3,Handebol,Av. Alamar Arantes,100,<agenda.Agenda object at 0x000001B6DF4CAB10>
+9,<locator.Locator object at 0x000001B6E19DF650>,3,Futebol,Rua T6,300,<agenda.Agenda object at 0x000001B6E19EBD50>
+10,<locator.Locator object at 0x000001B6E19DF650>,3,Tenis,Av. Alamar Arantes,300,<agenda.Agenda object at 0x000001B6E19F6490>
+11,<locator.Locator object at 0x000001B6E19DF650>,3,Basquete,Av. Alamar Arantes,320,<agenda.Agenda object at 0x000001B6E19F5D90>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aluguel de Quadra</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/rent_court_styles.css')}}">
+</head>
+
+<body>
+    <h1>Alugar Quadra:</h1>
+    {% for table in tables %}
+    <form action="/rent_court" method="POST">
+        <div class="table-container">
+            {{ table | safe }}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Alugar" class="submit-button">
+    </form>
+    <script>
+        tables = document.getElementsByClassName("table-container");
+        for (let i = 0; i < tables.length; i++) {
+            rows = tables[i].getElementsByTagName("tr");
+            for (let j = 0; j < rows.length; j++) {
+                if (rows[j].innerHTML.includes("Disponível")) {
+                    rows[j].style.backgroundColor = "#00FF00";
+                    // checkbox value must be row index
+                    index = rows[j].getElementsByTagName("th")
+                    // add checkbox to row
+                    rows[j].innerHTML += "<td><input type='checkbox' name='rented' value='" + index[0].innerHTML + "'></td>";
+                }
+                else if (rows[j].innerHTML.includes("Indisponível")) {
+                    rows[j].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

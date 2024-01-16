@@ -11,9 +11,9 @@ class Renter(User):
         self.reservations = []
         self.object = self
         super().userData["Renter"].append(self.__dict__)
-        print("______________________________________")
-        print(f"Renter {self.renterID} created")
-        print(f"Renter {self.renterID} data: {self.__dict__}")
+        ## print("______________________________________")
+        ## print(f"Renter {self.renterID} created")
+        ## print(f"Renter {self.renterID} data: {self.__dict__}")
         super().updateUserData("Renter")
 
     @classmethod

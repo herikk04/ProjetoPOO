@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Perfil de Usuário</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/user_profile_styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/user_profile_styles.css')}}">
 </head>
+
 <body>
     <div class="page-top-buttons">
-        <input type='button' value="Voltar" onclick="history.go(-1)()">
+        <a href='{{ user_page }}'><button>Voltar</button></a>
         <button id="editDataButton">Editar Dados</button> <!--EM ANDAMENTO-->
         <button id="logoutButton">Sair</button>
     </div>
@@ -21,4 +23,5 @@
     </div>
     <script src="{{ url_for('static',filename='script/script.js') }}"></script>
 </body>
+
 </html>
