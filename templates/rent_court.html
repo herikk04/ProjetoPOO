@@ -25,6 +25,7 @@
     {{ success_span | safe}}
     <script>
         tables = document.getElementsByClassName("table-container");
+        tables[0].getElementsByTagName("th")[0].innerHTML = 'Horário';
         for (let i = 0; i < tables.length; i++) {
             rows = tables[i].getElementsByTagName("tr");
             for (let j = 0; j < rows.length; j++) {
@@ -33,13 +34,16 @@
                     // checkbox value must be row index
                     index = rows[j].getElementsByTagName("th")
                     // add checkbox to row
-                    rows[j].innerHTML += "<td><input type='checkbox' name='rented' value='" + index[0].innerHTML + "'></td>";
+                    rows[j].innerHTML += "<td><input id='rented' type='checkbox' name='rented' value='" + index[0].innerHTML + "'></td>";
                 }
                 else if (rows[j].innerHTML.includes("Indisponível")) {
                     rows[j].style.display = "none";
                 }
             }
         }
+        // naming the new column
+        tableHead = tables[0].getElementsByTagName("thead");
+        tableHead[0].getElementsByTagName("tr")[0].innerHTML += "<th>Alugar</th>";
     </script>
 </body>
 
