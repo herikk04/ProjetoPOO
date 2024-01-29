@@ -22,8 +22,8 @@ class Locator(User):
         return self.locatorID
     
 
-    def addCourts(self, courtType, location, pricePerHour, courtagenda):
-        thisCourt = court.Court(self.object, self.locatorID, courtType, location, pricePerHour, courtagenda)
+    def addCourts(self, courtType, location, pricePerHour, maxPlayers, courtagenda):
+        thisCourt = court.Court(self.object, self.locatorID, courtType, location, pricePerHour, maxPlayers, courtagenda)
         print("______________________________________")
         print(f"Locator {self.locatorID} added court {thisCourt.getCourtID()}")
         super().updateUserData("Locator")

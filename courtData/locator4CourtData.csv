@@ -1,0 +1,2 @@
+courtID,thisLocator,locatorID,courtType,location,pricePerHour,agenda
+12,<locator.Locator object at 0x000001EF14460260>,4,badminton,Goiânia,35,<agenda.Agenda object at 0x000001EF15C5AED0>

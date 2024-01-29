@@ -7,7 +7,7 @@ class Court:
     courtData = {}
 
 
-    def __init__(self, thisLocator, locatorID, courtType, location, pricePerHour, courtagenda):
+    def __init__(self, thisLocator, locatorID, courtType, location, pricePerHour, maxPlayers, courtagenda):
         self.courtID = self.__class__.ser
         self.__class__.ser+=1
         self.thisLocator = thisLocator
@@ -15,6 +15,7 @@ class Court:
         self.courtType = courtType
         self.location = location
         self.pricePerHour = pricePerHour
+        self.maxPlayers = maxPlayers
         thisAgenda = agenda.Agenda(self, courtagenda)
         self.agenda = thisAgenda
 
