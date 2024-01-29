@@ -222,7 +222,19 @@ def user_profile():
     username = thisUser.username
     phoneNumber = thisUser.phoneNumber
     user_page = f"/dashboard?locatorID={userId}" if userType == "Locator" else f"/courts?renterID={userId}"
-    return render_template('user_profile.html', name=name, email=email, username=username, phoneNumber=phoneNumber, user_page=user_page)
+    additional_data = ""
+    if userType == "Renter":
+        additional_data = additional_data + "<h3>Reservas</h3>"
+        additional_data = additional_data + "<div id='userData'>"
+        reservations = thisUser.reservations
+        print(reservations)
+        for reservation in reservations:
+            additional_data = additional_data + f"<p>Reserva: {reservation.resID}</p>"
+            additional_data = additional_data + f"<p>Quadra: {reservation.court}</p>"
+            additional_data = additional_data + f"<p>Dados da reserva: {reservation.reservationInfo}"
+            additional_data = additional_data + "</div><div id='userData'>"
+    additional_data = additional_data + "</div>"
+    return render_template('user_profile.html', additional_data = additional_data, name=name, email=email, username=username, phoneNumber=phoneNumber, user_page=user_page)
 
 @app.route('/request_courts', methods=['GET'])
 def request_courts():
@@ -283,14 +295,17 @@ def rent_court():
         if court.courtID == courtID:
             thisCourt = court
     courtAgenda = court.agenda
+    courtAgendaData = courtAgenda.courtAgenda
+    courtAgendaData = agenda.Agenda.filterAgenda(courtAgendaData)
     if request.method == 'GET':
-        courtAgendaData = courtAgenda.courtAgenda
-        courtAgendaData = agenda.Agenda.filterAgenda(courtAgendaData)
         return render_template('rent_court.html', courtID=courtID, renterID=renterID, tables=[courtAgendaData.to_html(classes='data')], titles=[''])
     elif request.method == 'POST':
-        hours = request.getlist('rented')
+        hours = request.form.getlist('rented')
         for hour in hours:
-            thisCourt.rentCourt(hour, thisRenter)
+            thisCourt.bookCourt(renterID, hour)
+        success_span = "<span class='success'>Reserva realizada com sucesso!</span>"
+        return render_template('rent_court.html', courtID=courtID, renterID=renterID, tables=[courtAgendaData.to_html(classes='data')], titles=[''], success_span=success_span)
+    
 
 @app.route('/logout')
 def logout():

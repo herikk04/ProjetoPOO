@@ -3,7 +3,7 @@ from  user import User
 class Renter(User):
     renterSer = 0
 
-    def __init__(self, name, email, phoneNumber, username, password,):
+    def __init__(self, name, email, phoneNumber, username, password):
         super().__init__(name, email, phoneNumber, username, password)
         self.userType = "Renter"
         self.renterID = self.__class__.renterSer
@@ -17,21 +17,17 @@ class Renter(User):
         super().updateUserData("Renter")
 
     @classmethod
-    def registerReservation(__class__, reservationID, userID):
-        super().userData["Renter"][userID]["reservations"].append(reservationID)
-        super().updateUserData("Renter")
+    def registerReservation(__class__, reservation, userID):
+        thisRenter = User.getUserObject("Renter", userID)
+        thisRenter.reservations.append(reservation)
+        User.updateUserData("Renter", thisRenter)
 
 
     @classmethod
     def unregisterReservation(__class__, reservationID, userID):
         del super().userData["Renter"][userID]["reservations"] ## PRECISA SER OBSERVADO --> NA HORA DE REMOVER A RESERVA CERTA
         super().updateUserData("Renter")
-    
-    
-    @classmethod
-    def getRenterName(__class__, userID):  ## TALVEZ SERÁ PASSADO PARA A CLASSE MÃE
-        
-        return super().userData["Renter"]
+
     
     def getID(self):
 

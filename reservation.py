@@ -1,3 +1,4 @@
+import pandas as pd
 
 class Reservation:
     ser = 0
@@ -10,8 +11,14 @@ class Reservation:
         self.court = court
         self.userName = userName
         self.user = user
-        self.reservationData = (date, startTime, endTime)
+        self.reservationInfo = (date, startTime, endTime)
         __class__.reservationsData.append(self.__dict__)
+        self.updateReservationsData()
+    
+
+    def updateReservationsData(self):
+        newReservationsData = pd.DataFrame(self.__class__.reservationsData)
+        newReservationsData.to_csv("reservationData/reservationsData.csv", index=False)
 
     def getResData(self):
 

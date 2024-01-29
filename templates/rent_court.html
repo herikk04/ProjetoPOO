@@ -10,13 +10,19 @@
 <body>
     <h1>Alugar Quadra:</h1>
     {% for table in tables %}
-    <form action="/rent_court" method="POST">
+    <form method="POST">
         <div class="table-container">
             {{ table | safe }}
         </div>
         {% endfor %}
         <input type="submit" value="Alugar" class="submit-button">
     </form>
+    <a href="/user_profile?userID={{ renterID }}&userType=Renter">
+        <button class="submit-button">Finalizar</button>
+    </a>
+    <br>
+    <br>
+    {{ success_span | safe}}
     <script>
         tables = document.getElementsByClassName("table-container");
         for (let i = 0; i < tables.length; i++) {
