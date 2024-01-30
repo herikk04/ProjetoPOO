@@ -1,4 +1,4 @@
-body {
+/*body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -9,10 +9,39 @@ body {
     height: 100vh;
     justify-content: center;
 }
+*/
 
-h2 {
-    margin-bottom: 20px;
-    color: #333;
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    /* Gradiente que combina com a caixa de login preta */
+    background: linear-gradient(to right, #2c3e50 0%, #4a586e 100%);
+}
+
+h2.welcome-message {
+    color: #FFC107; /* Cor de destaque */
+    font-size: 24px; /* Tamanho maior para mais destaque */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    margin-bottom: 30px; /* Espaçamento maior para separar do restante do conteúdo */
+    animation: fadeIn 2s ease-in-out; /* Animação suave de entrada */
+}
+
+/* Animação fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 form {
@@ -95,4 +124,39 @@ button[type="submit"]:hover {
 .hour-selector > p{
     width: 100%;
     margin: 0;
+}
+
+/* Estiliza a caixa de seleção padrão */
+input[type="checkbox"] {
+    appearance: none; /* Remove o estilo padrão do navegador */
+    -webkit-appearance: none; /* Para navegadores Webkit */
+    -moz-appearance: none; /* Para navegadores Mozilla */
+    width: 20px; /* Define a largura desejada */
+    height: 20px; /* Define a altura desejada */
+    border: 2px solid #333; /* Cor da borda */
+    border-radius: 4px; /* Borda arredondada */
+    cursor: pointer; /* Altera o cursor ao passar por cima */
+    outline: none; /* Remove a borda de foco padrão */
+}
+
+/* Estiliza a caixa de seleção quando marcada */
+input[type="checkbox"]:checked {
+    background-color: #4caf50; /* Cor de fundo quando marcada */
+    border-color: #4caf50; /* Cor da borda quando marcada */
+}
+
+/* Estiliza o indicador de seleção (marca de verificação) */
+input[type="checkbox"]::before {
+    content: "\2713"; /* Caractere de marca de verificação Unicode ✓ */
+    font-size: 16px; /* Tamanho da fonte do indicador */
+    color: #fff; /* Cor do indicador quando marcada */
+    display: block;
+    text-align: center;
+    line-height: 20px; /* Centraliza verticalmente o indicador */
+}
+
+/* Estiliza a caixa de seleção quando desativada */
+input[type="checkbox"]:disabled {
+    opacity: 0.6; /* Opacidade reduzida para indicar desativado */
+    cursor: not-allowed; /* Cursor de não permitido */
 }

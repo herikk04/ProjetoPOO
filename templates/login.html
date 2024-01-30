@@ -9,30 +9,33 @@
 </head>
 
 <body>
-    <h2>Olá, por favor faça login ou cadastre-se para continuar!</h2>
+    <h2 class="welcome-message">Pronto para começar? Entre ou crie sua conta!</h2>
     <div class="login-container">
         <div class="login-form">
             <form method="POST" action="/login">
-                <label for="userType">Você é dono ou consumidor de quadras?</label>
-                <select id="userType" name="userType">
-                    <option value="Locator">Dono</option>
-                    <option value="Renter">Consumidor</option>
-                </select>
-                <br>
                 <input type="text" id="username" name="username" placeholder="Nome de Usuário" required><br>
                 <input type="password" id="password" name="password" placeholder="Senha" required><br>
+                
+                <div class="radio-container">
+                    <input type="radio" id="locator" name="userType" value="Locator" required>
+                    <label for="locator">Dono</label>
+    
+                    <input type="radio" id="renter" name="userType" value="Renter" required>
+                    <label for="renter">Consumidor</label>
+                </div>
+    
                 <button type="submit">Entrar</button>
             </form>
             {% if error %}
             <p style="color: red;">{{ error }}</p>
             {% endif %}
         </div>
-        <div class="button-container">
-            <a href="/add_user">
-                <button>Adicionar Novo Usuário</button>
-            </a>
+        <div class="new-account-container">
+            Novo aqui? <a href="/add_user" class="create-account-link">Criar uma conta</a>
         </div>
+        
     </div>
+    
 </body>
 
 </html>

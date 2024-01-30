@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Usuário</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/add_user_styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/add_user_styles.css') }}">
 </head>
-
 <body>
-    <h2>Adicionar Novo Usuário</h2>
+    <h2 class="welcome-message">Pronto para se juntar a nós?</h2>
     <div class="user-type-selector">
-        <div class="button-container">
-            <a href="/add_user_renter">
-                <button>Quero achar quadras para serem alugadas por minha pessoa!</button>
-            </a>
-        </div>
-        <div class="button-container">
-            <a href="/add_user_locator">
-                <button>Quero achar pessoas para alugar minhas quadras!</button>
-            </a>
-        </div>
+        <a href="/add_user_renter" class="user-type-link">Sim! Quero encontrar quadras para alugar!</a>
+        <a href="/add_user_locator" class="user-type-link">Sim! Quero oferecer minhas quadras para aluguel!</a>
     </div>
 </body>
-
 </html>

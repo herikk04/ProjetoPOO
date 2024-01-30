@@ -1,7 +1,6 @@
-
 body {
-    font-family: Arial, sans-serif;
-    background-color: rgb(0, 103, 212);
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #2c3e50 0%, #4a586e 100%);
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,42 +10,52 @@ body {
     justify-content: center;
 }
 
-h2 {
+/*h2 {
     color: white;
-    margin-bottom: 0px;
+    font-size: 24px; /* Aumento do tamanho da fonte para mais destaque */
+    /*text-align: center;
+    margin-bottom: 40px; /* Aumento do espaçamento para separar do conteúdo abaixo */
+/*}*/
+
+h2.welcome-message {
+    color: #ffffff; /* Cor de destaque */
+    font-size: 24px; /* Tamanho maior para mais destaque */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    margin-bottom: 30px; /* Espaçamento maior para separar do restante do conteúdo */
+    animation: fadeIn 2s ease-in-out; /* Animação suave de entrada */
 }
 
+/* Animação fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .user-type-selector {
-    border-radius: 5px;
-    background-color: #2ecc71;
-    inline-size: 30%;
-    block-size: 20%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     align-items: center;
-    gap: 20px;
+    gap: 20px; /* Espaçamento entre os links */
 }
 
-button {
-    background-color: #1e7e46;
+.user-type-link {
+    background-color: #1e7e46; /* Cor de fundo dos botões/links */
     color: white;
     border: none;
     border-radius: 5px;
-    margin: 10px 0 10px 0;
+    text-decoration: none; /* Remover sublinhado padrão do link */
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 12px 20px;
     font-size: 16px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
+    cursor: pointer; /* Mãozinha ao passar o mouse para indicar clicabilidade */
 }
 
-.button-container {
-    text-align: center;
-    margin-top: 2px;
+.user-type-link:hover {
+    background-color: #45a049; /* Cor ao passar o mouse */
 }
-
-button:hover {
-    background-color: #45a049;
-}        

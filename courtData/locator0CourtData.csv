@@ -1,5 +1,5 @@
 courtID,thisLocator,locatorID,courtType,location,pricePerHour,agenda
-0,<locator.Locator object at 0x7f61cab5db50>,0,Basquete,lote 15,30000,<agenda.Agenda object at 0x7f61cb28cad0>
-1,<locator.Locator object at 0x7f61cab5db50>,0,chwlkd,aloc,200,<agenda.Agenda object at 0x7f61cab5dcd0>
-2,<locator.Locator object at 0x7f61cab5db50>,0,cwjioepq,lote 14,3000,<agenda.Agenda object at 0x7f61cb28cc50>
-3,<locator.Locator object at 0x7f61cab5db50>,0,Tenis,Av. Palmeiras,2500,<agenda.Agenda object at 0x7f61caa60bd0>
+0,<locator.Locator object at 0x000002344495B470>,0,Basquete,lote 15,30000,<agenda.Agenda object at 0x0000023444BB56A0>
+1,<locator.Locator object at 0x000002344495B470>,0,chwlkd,aloc,200,<agenda.Agenda object at 0x00000234432BF530>
+2,<locator.Locator object at 0x000002344495B470>,0,cwjioepq,lote 14,3000,<agenda.Agenda object at 0x0000023443432B40>
+3,<locator.Locator object at 0x000002344495B470>,0,Tenis,Av. Palmeiras,2500,<agenda.Agenda object at 0x000002344327D5E0>

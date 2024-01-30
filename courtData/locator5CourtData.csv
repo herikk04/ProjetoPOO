@@ -1,0 +1,3 @@
+courtID,thisLocator,locatorID,courtType,location,pricePerHour,agenda
+12,<locator.Locator object at 0x0000023444F06240>,5,Basquete,Rua amir,100,<agenda.Agenda object at 0x00000234434061B0>
+13,<locator.Locator object at 0x0000023444F06240>,5,Basquete,Rua amir2,100,<agenda.Agenda object at 0x000002344344C950>

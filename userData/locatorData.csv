@@ -1,5 +1,7 @@
 userType,name,email,phoneNumber,username,password,locatorID,ownedCourts,object
-Locator,Vitória,kkkas@ll.com,24455447,vitoriamarinho,nvhher,0,"[<court.Court object at 0x7f61caa63850>, <court.Court object at 0x7f61caa624d0>, <court.Court object at 0x7f61cd305b10>, <court.Court object at 0x7f61cbb38190>]",<locator.Locator object at 0x7f61cab5db50>
-Locator,ainstem,sa@asd.m,2568,asmfdlsdçç,250142,1,[],<locator.Locator object at 0x7f61caa60250>
-Locator,kaio,pedro@pedro.p,2334234,zedaspinga,locli,2,[<court.Court object at 0x7f61caa61b10>],<locator.Locator object at 0x7f61caa5e750>
-Locator,Mateus,mateuslacerda253@gmail.com,62981823352,mateus.lacerda,mateuslas,3,"[<court.Court object at 0x7f61ca88bad0>, <court.Court object at 0x7f61ca8887d0>, <court.Court object at 0x7f61ca86f0d0>, <court.Court object at 0x7f61ca88a950>, <court.Court object at 0x7f61ca88a390>, <court.Court object at 0x7f61ca895bd0>, <court.Court object at 0x7f61ca888910>]",<locator.Locator object at 0x7f61cc2edbd0>
+Locator,Vitória,kkkas@ll.com,24455447,vitoriamarinho,nvhher,0,"[<court.Court object at 0x0000023443163C50>, <court.Court object at 0x00000234436E8800>, <court.Court object at 0x00000234433EB470>, <court.Court object at 0x00000234432DAF90>]",<locator.Locator object at 0x000002344495B470>
+Locator,ainstem,sa@asd.m,2568,asmfdlsdçç,250142,1,[],<locator.Locator object at 0x00000234447F5640>
+Locator,kaio,pedro@pedro.p,2334234,zedaspinga,locli,2,[<court.Court object at 0x0000023443106300>],<locator.Locator object at 0x000002344492F110>
+Locator,Mateus,mateuslacerda253@gmail.com,62981823352,mateus.lacerda,mateuslas,3,"[<court.Court object at 0x0000023444D1DAF0>, <court.Court object at 0x000002344376B3B0>, <court.Court object at 0x0000023444DAEB70>, <court.Court object at 0x0000023444DAEB10>, <court.Court object at 0x0000023444DAF0B0>, <court.Court object at 0x0000023444DAF4D0>, <court.Court object at 0x0000023444DAEF30>]",<locator.Locator object at 0x00000234434311C0>
+Locator,herik,herikkauan05@gmail.com,62994951233,herik,1234,4,[],<locator.Locator object at 0x0000023444F04B30>
+Locator,jjj,herikkauan04@gmail.com,62994951233,herik,1234,5,"[<court.Court object at 0x0000023444A72EA0>, <court.Court object at 0x00000234432D8710>]",<locator.Locator object at 0x0000023444F06240>
